@@ -2,6 +2,7 @@
   "recommendations": [
     "astro-build.astro-vscode",
     "editorconfig.editorconfig",
+    "ms-azuretools.vscode-docker",
     "esbenp.prettier-vscode",
     "github.vscode-pull-request-github",
     "eamodio.gitlens"

@@ -12,5 +12,7 @@
   "files.eol": "\n",
   "files.insertFinalNewline": false,
   "files.trimFinalNewlines": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "redhat.telemetry.enabled": false,
+  "gitlens.telemetry.enabled": false
 }
