@@ -1,0 +1,20 @@
+on:
+  push:
+    branches:
+      - main
+name: Format code
+permissions:
+  contents: write
+jobs:
+  format-code:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3.5.3
+      - uses: volta-cli/action@v4.0.0
+      - run: |
+          npm ci
+          npx prettier --write . "!.github"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email actions@noreply.github.com
+          git commit -am "Format code" || true
+          git push
