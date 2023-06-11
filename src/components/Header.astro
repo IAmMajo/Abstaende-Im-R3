@@ -1,6 +1,8 @@
 ---
+import checkIcon from "@material-symbols/svg-400/outlined/check.svg?raw";
 import codeIcon from "@material-symbols/svg-400/outlined/code.svg?raw";
 import paletteIcon from "@material-symbols/svg-400/outlined/palette.svg?raw";
+import { MdElevation } from "@material/web/elevation/elevation";
 import { MdIcon } from "@material/web/icon/icon";
 import { MdStandardIconButton } from "@material/web/iconbutton/standard-icon-button";
 import { MdMenu } from "@material/web/menu/menu";
@@ -8,6 +10,7 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
 ---
 
 <header>
+  <MdElevation />
   <h1 class="title-large">Abstände im R³</h1>
   {
     (
@@ -32,15 +35,37 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
         <MdMenu id="design-menu" client:only="lit">
           {
             // @ts-expect-error
-            <MdMenuItem headline="Systemeinstellung" client:only="lit" />
+            <MdMenuItem headline="Systemeinstellung" client:only="lit">
+              <MdIcon slot="start" set:html={checkIcon} client:only="lit" />
+            </MdMenuItem>
           }
           {
             // @ts-expect-error
-            <MdMenuItem headline="Hell" client:only="lit" />
+            <MdMenuItem headline="Hell" client:only="lit">
+              {
+                // @ts-expect-error
+                <MdIcon
+                  class="invisible"
+                  slot="start"
+                  set:html={checkIcon}
+                  client:only="lit"
+                />
+              }
+            </MdMenuItem>
           }
           {
             // @ts-expect-error
-            <MdMenuItem headline="Dunkel" client:only="lit" />
+            <MdMenuItem headline="Dunkel" client:only="lit">
+              {
+                // @ts-expect-error
+                <MdIcon
+                  class="invisible"
+                  slot="start"
+                  set:html={checkIcon}
+                  client:only="lit"
+                />
+              }
+            </MdMenuItem>
           }
         </MdMenu>
       )
@@ -48,18 +73,31 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
   </div>
 </header>
 <style>
+  header {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px 0 16px;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 8px;
+    transition: 0.5s cubic-bezier(0.2, 0, 0, 1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
   h1 {
     flex: 1;
   }
 
-  header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
   div {
     position: relative;
+  }
+
+  .surface-container {
+    --md-elevation-level: 2;
   }
 </style>
 <script>
@@ -68,12 +106,20 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
 
   const designButton =
     document.querySelector<MdStandardIconButton>("#design-button")!;
-
   designButton.addEventListener("click", () => {
     const menu = document.querySelector<MdMenu>("#design-menu");
     if (menu) {
       menu.anchor = designButton;
       menu.show();
     }
+  });
+
+  const headerClasses = document.querySelector("header")!.classList;
+  addEventListener("scroll", () => {
+    if (scrollY === 0) {
+      headerClasses.remove("surface-container");
+      return;
+    }
+    headerClasses.add("surface-container");
   });
 </script>

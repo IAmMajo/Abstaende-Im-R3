@@ -1,0 +1,29 @@
+:root {
+  --margin: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+md-filled-button {
+  width: fit-content;
+}
+
+md-menu-item md-icon {
+  margin-left: 16px;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+@media (min-width: 600px) {
+  :root {
+    --margin: 24px;
+  }
+}

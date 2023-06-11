@@ -34,15 +34,15 @@ const { title, description } = Astro.props;
 </html>
 <style>
   body {
-    user-select: none;
-    -webkit-user-select: none;
-    margin: 0 16px;
+    margin: calc(64px + var(--margin)) var(--margin) calc(80px + var(--margin));
   }
 
-  @media (min-width: 600px) {
-    body {
-      margin: 0 24px;
-    }
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin);
+    max-width: 1200px;
+    margin: auto;
   }
 </style>
 <script src="@material/web/ripple/ripple"></script>
