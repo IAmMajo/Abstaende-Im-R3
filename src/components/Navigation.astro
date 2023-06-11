@@ -11,8 +11,8 @@ import { MdNavigationTab } from "@material/web/labs/navigationtab/navigation-tab
 
 const path = new URL(Astro.request.url).pathname;
 const pointLineActive = path === "/";
-const pointPlaneActive = path === "/point-plane";
-const lineLineActive = path === "/line-line";
+const pointPlaneActive = path === "/point-plane/";
+const lineLineActive = path === "/line-line/";
 ---
 
 <MdNavigationBar>
@@ -31,7 +31,7 @@ const lineLineActive = path === "/line-line";
         )
       }
     </a>
-    <a href="/point-plane">
+    <a href="/point-plane/">
       {
         (
           // @ts-expect-error
@@ -45,7 +45,7 @@ const lineLineActive = path === "/line-line";
         )
       }
     </a>
-    <a href="/line-line">
+    <a href="/line-line/">
       {
         (
           // @ts-expect-error
