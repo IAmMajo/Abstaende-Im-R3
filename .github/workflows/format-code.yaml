@@ -3,6 +3,9 @@ on:
     branches:
       - main
 name: Format code
+concurrency:
+  group: format-code
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:
