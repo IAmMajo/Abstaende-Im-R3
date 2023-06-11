@@ -1,0 +1,69 @@
+---
+import codeIcon from "@material-symbols/svg-400/outlined/code.svg?raw";
+import paletteIcon from "@material-symbols/svg-400/outlined/palette.svg?raw";
+import { MdIcon } from "@material/web/icon/icon";
+import { MdStandardIconButton } from "@material/web/iconbutton/standard-icon-button";
+import { MdMenu } from "@material/web/menu/menu";
+import { MdMenuItem } from "@material/web/menu/menu-item";
+---
+
+<header>
+  <h1 class="title-large">Abstände im R³</h1>
+  {
+    (
+      // @ts-expect-error
+      <MdStandardIconButton href="https://github.com/IAmMajo/Abstaende-Im-R3">
+        <MdIcon set:html={codeIcon} />
+      </MdStandardIconButton>
+    )
+  }
+  <div>
+    {
+      (
+        // @ts-expect-error
+        <MdStandardIconButton id="design-button">
+          <MdIcon set:html={paletteIcon} />
+        </MdStandardIconButton>
+      )
+    }
+    {
+      (
+        // @ts-expect-error
+        <MdMenu id="design-menu" client:only="lit">
+          {
+            // @ts-expect-error
+            <MdMenuItem headline="Systemeinstellung" client:only="lit" />
+          }
+          {
+            // @ts-expect-error
+            <MdMenuItem headline="Hell" client:only="lit" />
+          }
+          {
+            // @ts-expect-error
+            <MdMenuItem headline="Dunkel" client:only="lit" />
+          }
+        </MdMenu>
+      )
+    }
+  </div>
+</header>
+<style>
+  div {
+    position: relative;
+  }
+</style>
+<script>
+  import type { MdStandardIconButton } from "@material/web/iconbutton/standard-icon-button";
+  import type { MdMenu } from "@material/web/menu/menu";
+
+  const designButton =
+    document.querySelector<MdStandardIconButton>("#design-button")!;
+
+  designButton.addEventListener("click", () => {
+    const menu = document.querySelector<MdMenu>("#design-menu");
+      if (menu) {
+        menu.anchor = designButton;
+        menu.show();
+      }
+  });
+</script>

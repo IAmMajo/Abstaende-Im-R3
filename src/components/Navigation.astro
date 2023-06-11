@@ -1,0 +1,34 @@
+---
+import { MdNavigationBar } from "@material/web/labs/navigationbar/navigation-bar";
+import { MdNavigationTab } from "@material/web/labs/navigationtab/navigation-tab";
+
+const path = new URL(Astro.request.url).pathname;
+---
+
+<MdNavigationBar>
+  {
+    (
+      // @ts-expect-error
+      <MdNavigationTab label="Punkt-Gerade" />
+    )
+  }
+  {
+    (
+      // @ts-expect-error
+      <MdNavigationTab label="Punkt-Ebene" />
+    )
+  }
+  {
+    (
+      // @ts-expect-error
+      <MdNavigationTab label="Gerade-Gerade" />
+    )
+  }
+</MdNavigationBar>
+<style>
+  md-navigation-bar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+  }
+</style>

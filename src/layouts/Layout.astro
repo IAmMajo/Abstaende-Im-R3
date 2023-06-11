@@ -1,22 +1,48 @@
 ---
-import "../theme/theme.css";
+import "@fontsource/roboto/latin-400.css";
+import "@fontsource/roboto/latin-500.css";
+import Header from "../components/Header.astro";
+import Navigation from "../components/Navigation.astro";
+import "../styles/global.css";
+import "../styles/theme/theme.css";
 
 export interface Props {
   title: string;
+  description: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{title} | Abstände im R³</title>
   </head>
-  <body>
-    <slot />
+  <body class="surface on-surface-text body-medium">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Navigation />
   </body>
 </html>
+<style>
+  body {
+    user-select: none;
+    -webkit-user-select: none;
+    margin: 0 16px;
+  }
+
+  @media (min-width: 600px) {
+    body {
+      margin: 0 24px;
+    }
+  }
+</style>
+<script src="@material/web/ripple/ripple"></script>
