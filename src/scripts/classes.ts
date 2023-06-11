@@ -27,11 +27,19 @@ export class Vector {
   }
 
   public dotProduct(pPoint: Vector): number {
-    return(this.xCord * pPoint.xCord + this.yCord * pPoint.yCord + this.zCord * pPoint.zCord);
+    return (
+      this.xCord * pPoint.xCord +
+      this.yCord * pPoint.yCord +
+      this.zCord * pPoint.zCord
+    );
   }
 
   public magnitude(): number {
-    return Math.sqrt(this.xCord * this.xCord + this.yCord * this.yCord + this.zCord * this.zCord);
+    return Math.sqrt(
+      this.xCord * this.xCord +
+        this.yCord * this.yCord +
+        this.zCord * this.zCord
+    );
   }
 }
 
@@ -62,8 +70,14 @@ export class DirectionalVector {
 
 //A plane with a base and two directions
 export class Plane {
-  Vector1: DirectionalVector = new DirectionalVector(new Vector(0, 0, 0), new Vector(0, 0, 0));
-  Vector2: DirectionalVector = new DirectionalVector(new Vector(0, 0, 0), new Vector(0, 0, 0));
+  Vector1: DirectionalVector = new DirectionalVector(
+    new Vector(0, 0, 0),
+    new Vector(0, 0, 0)
+  );
+  Vector2: DirectionalVector = new DirectionalVector(
+    new Vector(0, 0, 0),
+    new Vector(0, 0, 0)
+  );
 
   constructor(pBase: Vector, pDirection1: Vector, pDirection2: Vector) {
     this.Vector1 = new DirectionalVector(pBase, pDirection1);
