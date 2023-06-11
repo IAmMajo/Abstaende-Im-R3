@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { MdFilledTextField } from "@material/web/textfield/filled-text-field";
+import { MdFilledButton } from "@material/web/button/filled-button";
 ---
 
 <Layout
@@ -11,4 +13,39 @@ import Layout from "../layouts/Layout.astro";
     Abstand zwischen einem Punkt und einer Gerade im dreidimensionalen Raum (R³)
     berechnen.
   </p>
+  <h3 class="headline-medium">Punkt</h3>
+  {
+    (
+      // @ts-expect-error
+      <MdFilledTextField
+        label="X-Koordinate"
+        placeholder="42,98"
+        type="number"
+        client:only="lit"
+      />
+    )
+  }
+  {
+    (
+      // @ts-expect-error
+      <MdFilledTextField
+        label="Y-Koordinate"
+        placeholder="42,98"
+        type="number"
+        client:only="lit"
+      />
+    )
+  }
+  {
+    (
+      // @ts-expect-error
+      <MdFilledTextField
+        label="Z-Koordinate"
+        placeholder="42,98"
+        type="number"
+        client:only="lit"
+      />
+    )
+  }
+  <MdFilledButton>Abstand berechnen</MdFilledButton>
 </Layout>

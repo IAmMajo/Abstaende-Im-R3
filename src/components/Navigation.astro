@@ -1,34 +1,81 @@
 ---
+import filledCircleIcon from "@material-symbols/svg-400/outlined/circle-fill.svg?raw";
+import circleIcon from "@material-symbols/svg-400/outlined/circle.svg?raw";
+import filledHexagonIcon from "@material-symbols/svg-400/outlined/hexagon-fill.svg?raw";
+import hexagonIcon from "@material-symbols/svg-400/outlined/hexagon.svg?raw";
+import filledSquareIcon from "@material-symbols/svg-400/outlined/square-fill.svg?raw";
+import squareIcon from "@material-symbols/svg-400/outlined/square.svg?raw";
+import { MdIcon } from "@material/web/icon/icon";
 import { MdNavigationBar } from "@material/web/labs/navigationbar/navigation-bar";
 import { MdNavigationTab } from "@material/web/labs/navigationtab/navigation-tab";
 
 const path = new URL(Astro.request.url).pathname;
+const pointLineActive = path === "/";
+const pointPlaneActive = path === "/point-plane";
+const lineLineActive = path === "/line-line";
 ---
 
 <MdNavigationBar>
-  {
-    (
-      // @ts-expect-error
-      <MdNavigationTab label="Punkt-Gerade" />
-    )
-  }
-  {
-    (
-      // @ts-expect-error
-      <MdNavigationTab label="Punkt-Ebene" />
-    )
-  }
-  {
-    (
-      // @ts-expect-error
-      <MdNavigationTab label="Gerade-Gerade" />
-    )
-  }
+  <nav>
+    <a href="/">
+      {
+        (
+          // @ts-expect-error
+          <MdNavigationTab label="Punkt-Gerade" active={pointLineActive}>
+            {pointLineActive ? (
+              <MdIcon slot="activeIcon" set:html={filledCircleIcon} />
+            ) : (
+              <MdIcon slot="inactiveIcon" set:html={circleIcon} />
+            )}
+          </MdNavigationTab>
+        )
+      }
+    </a>
+    <a href="/point-plane">
+      {
+        (
+          // @ts-expect-error
+          <MdNavigationTab label="Punkt-Ebene" active={pointPlaneActive}>
+            {pointPlaneActive ? (
+              <MdIcon slot="activeIcon" set:html={filledSquareIcon} />
+            ) : (
+              <MdIcon slot="inactiveIcon" set:html={squareIcon} />
+            )}
+          </MdNavigationTab>
+        )
+      }
+    </a>
+    <a href="/line-line">
+      {
+        (
+          // @ts-expect-error
+          <MdNavigationTab label="Gerade-Gerade" active={lineLineActive}>
+            {lineLineActive ? (
+              <MdIcon slot="activeIcon" set:html={filledHexagonIcon} />
+            ) : (
+              <MdIcon slot="inactiveIcon" set:html={hexagonIcon} />
+            )}
+          </MdNavigationTab>
+        )
+      }
+    </a>
+  </nav>
 </MdNavigationBar>
 <style>
   md-navigation-bar {
     position: fixed;
-    left: 0;
     bottom: 0;
+    left: 0;
+  }
+
+  nav {
+    width: 100%;
+    display: flex;
+  }
+
+  nav a {
+    display: flex;
+    flex: 1;
+    text-decoration: none;
   }
 </style>
