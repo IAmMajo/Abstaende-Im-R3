@@ -11,7 +11,7 @@ tasks:
       curl https://get.volta.sh | bash -s -- --skip-setup
       volta install node
       npm ci
-      npm i -g astro prettier
+      npm i -g astro prettier wrangler
     command: astro dev
 
 vscode:

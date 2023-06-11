@@ -1,0 +1,21 @@
+on: push
+name: Cloudflare Pages
+permissions:
+  contents: read
+  deployments: write
+jobs:
+  cloudflare-pages:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3.5.3
+      - uses: volta-cli/action@v4.0.0
+      - run: |
+          npm ci
+          npm run build
+      - uses: cloudflare/pages-action@v1.5.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 9839aabb4253ed85d80549a8f99ee832
+          projectName: abstaendeimr3
+          directory: dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
