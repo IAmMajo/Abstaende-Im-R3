@@ -6,40 +6,40 @@ import { MdFilledTextField } from "@material/web/textfield/filled-text-field";
 <div class="container">
   <div class="vectorsection">
     <h3 class="headline-small">Vektoren</h3>
-  {
-    (
-      // @ts-expect-error
-      <MdFilledTextField
-        label="X-Koordinate"
-        placeholder="42,98"
-        type="number"
-        client:only="lit"
-      />
-    )
-  }
-  {
-    (
-      // @ts-expect-error
-      <MdFilledTextField
-        label="Y-Koordinate"
-        placeholder="42,98"
-        type="number"
-        client:only="lit"
-      />
-    )
-  }
-  {
-    (
-      // @ts-expect-error
-      <MdFilledTextField
-        label="Z-Koordinate"
-        placeholder="42,98"
-        type="number"
-        client:only="lit"
-      />
-    )
-  }
-  </div> 
+    {
+      (
+        // @ts-expect-error
+        <MdFilledTextField
+          label="X-Koordinate"
+          placeholder="42,98"
+          type="number"
+          client:only="lit"
+        />
+      )
+    }
+    {
+      (
+        // @ts-expect-error
+        <MdFilledTextField
+          label="Y-Koordinate"
+          placeholder="42,98"
+          type="number"
+          client:only="lit"
+        />
+      )
+    }
+    {
+      (
+        // @ts-expect-error
+        <MdFilledTextField
+          label="Z-Koordinate"
+          placeholder="42,98"
+          type="number"
+          client:only="lit"
+        />
+      )
+    }
+  </div>
 </div>
 <style>
   .container {
@@ -48,7 +48,7 @@ import { MdFilledTextField } from "@material/web/textfield/filled-text-field";
     gap: var(--margin);
   }
 
-  .vectorsection{
+  .vectorsection {
     display: flex;
     margin: 0 30px;
     justify-content: center;
