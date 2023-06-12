@@ -1,7 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { MdFilledButton } from "@material/web/button/filled-button";
+
 import Point from "../components/Point.astro";
+import Line from "../components/Line.astro";
+import Abstandbtn from "../components/Abstandbtn.astro";
 ---
 
 <Layout
@@ -14,5 +16,6 @@ import Point from "../components/Point.astro";
     berechnen.
   </p>
   <Point />
-  <MdFilledButton>Abstand berechnen</MdFilledButton>
+  <Line />
+  <Abstandbtn />
 </Layout>
