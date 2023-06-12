@@ -2,7 +2,6 @@
 import checkIcon from "@material-symbols/svg-400/outlined/check.svg?raw";
 import codeIcon from "@material-symbols/svg-400/outlined/code.svg?raw";
 import paletteIcon from "@material-symbols/svg-400/outlined/palette.svg?raw";
-import { MdElevation } from "@material/web/elevation/elevation";
 import { MdIcon } from "@material/web/icon/icon";
 import { MdStandardIconButton } from "@material/web/iconbutton/standard-icon-button";
 import { MdMenu } from "@material/web/menu/menu";
@@ -10,7 +9,6 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
 ---
 
 <header>
-  <MdElevation />
   <h1 class="title-large">Abstände im R³</h1>
   {
     (
@@ -94,10 +92,6 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
 
   div {
     position: relative;
-  }
-
-  .surface-container {
-    --md-elevation-level: 2;
   }
 </style>
 <script>
