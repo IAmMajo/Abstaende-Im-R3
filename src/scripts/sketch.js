@@ -1,12 +1,15 @@
 let angle = 0;
-
+let dark = true;
+let light = false;
+let colordark = 20;
+let colorlight = 248;
 window.setup = function () {
   const Canvas = createCanvas(1200, 800, WEBGL);
   Canvas.parent("visual");
 };
 
 window.draw = function () {
-  background(175);
+  background(colordark);
   rectMode(CENTER);
   noStroke();
   fill(0, 0, 255);
