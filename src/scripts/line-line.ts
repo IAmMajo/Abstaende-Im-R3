@@ -5,11 +5,9 @@ export function lineLineDistanceCalc(
   pDirection1: Vector,
   pDirection2: Vector
 ): number {
-  
-return(0);  
+  return 0;
 }
 
-function checkLinearDependence(vector1:Vector,vector2:Vector):boolean {
-  
+function checkLinearDependence(vector1: Vector, vector2: Vector): boolean {
   return false;
 }
