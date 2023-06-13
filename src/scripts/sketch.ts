@@ -4,13 +4,10 @@ new p5((p5: p5) => {
   p5.setup = () => {
     p5.createCanvas(1200, 800, p5.WEBGL);
   };
+  const htmlStyle = getComputedStyle(document.documentElement);
   let angle = 0;
-  let dark = true;
-  let light = false;
-  let colordark = 20;
-  let colorlight = 248;
   p5.draw = () => {
-    p5.background(colordark);
+    p5.background(htmlStyle.getPropertyValue("--md-sys-color-surface"));
     p5.rectMode(p5.CENTER);
     p5.noStroke();
     p5.fill(0, 0, 255);
