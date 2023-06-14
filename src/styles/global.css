@@ -1,7 +1,7 @@
 :root {
   --margin: 16px;
-  user-select: none;
   -webkit-user-select: none;
+  user-select: none;
 }
 
 h2,
@@ -12,6 +12,10 @@ p {
 
 md-filled-button {
   width: fit-content;
+}
+
+md-icon {
+  line-height: 0;
 }
 
 md-menu-item md-icon {

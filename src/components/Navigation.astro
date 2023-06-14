@@ -8,6 +8,8 @@ import squareIcon from "@material-symbols/svg-400/outlined/square.svg?raw";
 import { MdIcon } from "@material/web/icon/icon";
 import { MdNavigationBar } from "@material/web/labs/navigationbar/navigation-bar";
 import { MdNavigationTab } from "@material/web/labs/navigationtab/navigation-tab";
+import { MdList } from "@material/web/list/list";
+import { MdListItemLink } from "@material/web/list/list-item-link";
 
 const path = new URL(Astro.request.url).pathname;
 const pointLineActive = path === "/";
@@ -61,10 +63,65 @@ const lineLineActive = path === "/line-line/";
     </a>
   </nav>
 </MdNavigationBar>
+<MdList>
+  {
+    (
+      // @ts-expect-error
+      <MdListItemLink
+        class:list={[{ active: pointLineActive }]}
+        headline="Punkt-Gerade"
+        href="/"
+      >
+        <MdIcon
+          slot="start"
+          data-variant="icon"
+          set:html={pointLineActive ? filledCircleIcon : circleIcon}
+        />
+      </MdListItemLink>
+    )
+  }
+  {
+    (
+      // @ts-expect-error
+      <MdListItemLink
+        class:list={[{ active: pointPlaneActive }]}
+        headline="Punkt-Ebene"
+        href="/point-plane/"
+      >
+        <MdIcon
+          slot="start"
+          data-variant="icon"
+          set:html={pointPlaneActive ? filledSquareIcon : squareIcon}
+        />
+      </MdListItemLink>
+    )
+  }
+  {
+    (
+      // @ts-expect-error
+      <MdListItemLink
+        class:list={[{ active: lineLineActive }]}
+        headline="Gerade-Gerade"
+        href="/line-line/"
+      >
+        <MdIcon
+          slot="start"
+          data-variant="icon"
+          set:html={lineLineActive ? filledHexagonIcon : hexagonIcon}
+        />
+      </MdListItemLink>
+    )
+  }
+</MdList>
 <style>
+  md-list {
+    display: none;
+  }
+
   md-navigation-bar {
     position: fixed;
     bottom: 0;
+    --md-navigation-bar-container-elevation: 0;
     left: 0;
     z-index: 1;
   }
@@ -78,5 +135,71 @@ const lineLineActive = path === "/line-line/";
     display: flex;
     flex: 1;
     text-decoration: none;
+  }
+
+  @media (min-width: 600px) {
+    md-navigation-bar {
+      top: 64px;
+      --md-navigation-bar-container-color: transparent;
+      --md-navigation-bar-container-height: calc(100% - 64px);
+      width: 88px;
+    }
+
+    nav {
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    nav a {
+      flex: unset;
+    }
+  }
+
+  @media (min-width: 841px) {
+    md-list {
+      display: unset;
+      position: fixed;
+      top: 72px;
+      left: 12px;
+      --md-list-item-list-item-container-shape: 28px;
+      --md-list-item-list-item-label-text-color: var(
+        --md-sys-color-on-surface-variant
+      );
+      width: 336px;
+    }
+
+    .active {
+      --md-list-item-list-item-container-color: var(
+        --md-sys-color-secondary-container
+      );
+      --md-list-item-list-item-leading-icon-color: var(
+        --md-sys-color-on-secondary-container
+      );
+      --md-list-item-list-item-label-text-color: var(
+        --md-sys-color-on-secondary-container
+      );
+      --md-list-item-list-item-hover-leading-icon-icon-color: var(
+        --md-sys-color-on-secondary-container
+      );
+      --md-list-item-list-item-hover-label-text-color: var(
+        --md-sys-color-on-secondary-container
+      );
+      --md-list-item-list-item-pressed-leading-icon-icon-color: var(
+        --md-sys-color-on-secondary-container
+      );
+      --md-list-item-list-item-pressed-label-text-color: var(
+        --md-sys-color-on-secondary-container
+      );
+      --md-list-item-list-item-focus-leading-icon-icon-color: var(
+        --md-sys-color-on-secondary-container
+      );
+      --md-list-item-list-item-focus-label-text-color: var(
+        --md-sys-color-on-secondary-container
+      );
+    }
+
+    md-navigation-bar {
+      display: none;
+    }
   }
 </style>

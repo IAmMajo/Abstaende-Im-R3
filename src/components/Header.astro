@@ -8,7 +8,7 @@ import { MdMenu } from "@material/web/menu/menu";
 import { MdMenuItem } from "@material/web/menu/menu-item";
 ---
 
-<header>
+<header class="surface">
   <h1 class="title-large">Abstände im R³</h1>
   {
     (
@@ -95,11 +95,9 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
   }
 </style>
 <script>
-  import type { MdStandardIconButton } from "@material/web/iconbutton/standard-icon-button";
   import type { MdMenu } from "@material/web/menu/menu";
 
-  const designButton =
-    document.querySelector<MdStandardIconButton>("#design-button")!;
+  const designButton = document.getElementById("design-button")!;
   designButton.addEventListener("click", () => {
     const menu = document.querySelector<MdMenu>("#design-menu");
     if (menu) {

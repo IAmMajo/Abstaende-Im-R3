@@ -34,7 +34,7 @@ const { title, description } = Astro.props;
 </html>
 <style>
   body {
-    margin: calc(64px + var(--margin)) var(--margin) calc(80px + var(--margin));
+    margin: 80px 16px 96px;
   }
 
   main {
@@ -43,6 +43,18 @@ const { title, description } = Astro.props;
     gap: var(--margin);
     max-width: 1200px;
     margin: auto;
+  }
+
+  @media (min-width: 600px) {
+    body {
+      margin: 88px 24px 24px 112px;
+    }
+  }
+
+  @media (min-width: 841px) {
+    body {
+      margin-left: 384px;
+    }
   }
 </style>
 <script src="@material/web/ripple/ripple"></script>
