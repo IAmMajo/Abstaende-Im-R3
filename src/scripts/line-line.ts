@@ -51,6 +51,8 @@ function calculateDistance(
   // Calculate the distance between the lines
   const distance: number =
     Math.abs(baseVector.dotProduct(crossProduct)) / crossProductMagnitude;
+  const distance: number =
+    Math.abs(baseVector.dotProduct(crossProduct)) / crossProductMagnitude;
 
   return distance;
 }
