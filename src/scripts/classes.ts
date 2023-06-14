@@ -26,8 +26,12 @@ export class Vector {
     );
   }
 
-  public equals(pPoint:Vector):boolean{
-    return this.xCord === pPoint.xCord && this.yCord === pPoint.yCord && this.zCord === pPoint.zCord;
+  public equals(pPoint: Vector): boolean {
+    return (
+      this.xCord === pPoint.xCord &&
+      this.yCord === pPoint.yCord &&
+      this.zCord === pPoint.zCord
+    );
   }
 
   public dotProduct(pPoint: Vector): number {
