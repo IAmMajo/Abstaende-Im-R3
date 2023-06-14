@@ -15,11 +15,7 @@ export function lineLineDistanceCalc(
   let linDep = checkLinearDependence(pDirection1, pDirection2);
   if (linDep) {
     // Calculate the distance between a point on the first line and the second line
-    return pointLineDistanceCalc(
-      pBase1,
-      pBase2,
-      pDirection1
-    );
+    return pointLineDistanceCalc(pBase1, pBase2, pDirection1);
   }
 
   // Calculate the distance between the lines
@@ -29,7 +25,7 @@ export function lineLineDistanceCalc(
 
 // Check if two vectors are linearly dependent
 function checkLinearDependence(vector1: Vector, vector2: Vector): boolean {
-  return vector1.crossProduct(vector2).equals( new Vector(0,0,0));
+  return vector1.crossProduct(vector2).equals(new Vector(0, 0, 0));
 }
 
 // Calculate the distance between two non-parallel lines
@@ -56,4 +52,3 @@ function calculateDistance(
 
   return distance;
 }
-
