@@ -15,7 +15,12 @@ export function lineLineDistanceCalc(
   let linDep = checkLinearDependence(pDirection1, pDirection2);
   if (linDep) {
     // Calculate the distance between a point on the first line and the second line
-    const distance = calculateDistanceLinearDependent(pBase1, pBase2, pDirection1, pDirection2);
+    const distance = calculateDistanceLinearDependent(
+      pBase1,
+      pBase2,
+      pDirection1,
+      pDirection2
+    );
     return distance;
   }
 
@@ -75,7 +80,8 @@ function calculateDistance(
   const crossProductMagnitude: number = crossProduct.magnitude();
 
   // Calculate the distance between the lines
-  const distance: number = Math.abs(baseVector.dotProduct(crossProduct)) / crossProductMagnitude;
+  const distance: number =
+    Math.abs(baseVector.dotProduct(crossProduct)) / crossProductMagnitude;
 
   return distance;
 }
@@ -94,7 +100,8 @@ function calculateDistanceLinearDependent(
   const direction1Magnitude: number = pDirection1.magnitude();
 
   // Calculate the projection of the base vector onto the direction vector
-  const projection: number = baseVector.dotProduct(pDirection1) / direction1Magnitude;
+  const projection: number =
+    baseVector.dotProduct(pDirection1) / direction1Magnitude;
 
   return Math.abs(projection);
 }
