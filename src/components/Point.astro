@@ -1,44 +1,17 @@
 ---
-import { MdFilledTextField } from "@material/web/textfield/filled-text-field";
+import CoordinateInput from "./CoordinateInput.astro";
 ---
 
 <h3 class="headline-medium">Punkt</h3>
 <div class="container">
   <div class="vectorsection">
-    <h3 class="headline-small">Vektoren</h3>
-    {
-      (
-        // @ts-expect-error
-        <MdFilledTextField
-          label="X-Koordinate"
-          placeholder="42,98"
-          type="number"
-          client:only="lit"
-        />
-      )
-    }
-    {
-      (
-        // @ts-expect-error
-        <MdFilledTextField
-          label="Y-Koordinate"
-          placeholder="42,98"
-          type="number"
-          client:only="lit"
-        />
-      )
-    }
-    {
-      (
-        // @ts-expect-error
-        <MdFilledTextField
-          label="Z-Koordinate"
-          placeholder="42,98"
-          type="number"
-          client:only="lit"
-        />
-      )
-    }
+    <h3 class="headline-small">Vektor</h3>
+    {/* Vektor X */}
+    <CoordinateInput id="pointX" label="X-Koordinate" />
+    {/* Vektor Y */}
+    <CoordinateInput id="pointY" label="Y-Koordinate" />
+    {/* Vektor Z */}
+    <CoordinateInput id="pointZ" label="Z-Koordinate" />
   </div>
 </div>
 <style>

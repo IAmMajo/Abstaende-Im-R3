@@ -1,93 +1,27 @@
 ---
-import { MdFilledTextField } from "@material/web/textfield/filled-text-field";
+import CoordinateInput from "./CoordinateInput.astro";
 ---
 
 <h3 class="headline-medium">Gerade</h3>
 <div class="container">
   <div class="vectorsection">
     <h3 class="headline-small">Richtungsvektor</h3>
-    {
-      (
-        //RichtungsvektorX
-        // @ts-expect-error
-        <MdFilledTextField
-          id="lineDirX"
-          label="X-Koordinate"
-          placeholder="42,98"
-          type="number"
-          client:only="lit"
-        />
-      )
-    }
-    {
-      (
-        //BasisvektorY
-        // @ts-expect-error
-        <MdFilledTextField
-          id="lineDirY"
-          label="Y-Koordinate"
-          placeholder="42,98"
-          type="number"
-          client:only="lit"
-        />
-      )
-    }
-    {
-      (
-        //RichtungsvektorZ
-        // @ts-expect-error
-        <MdFilledTextField
-          id="lineDirZ"
-          label="Z-Koordinate"
-          placeholder="42,98"
-          type="number"
-          client:only="lit"
-        />
-      )
-    }
+    {/* Richtungsvektor X */}
+    <CoordinateInput id="lineDirX" label="X-Koordinate" />
+    {/* Richtungsvektor Y */}
+    <CoordinateInput id="lineDirY" label="Y-Koordinate" />
+    {/* Richtungsvektor Z */}
+    <CoordinateInput id="lineDirZ" label="Z-Koordinate" />
   </div>
 
   <div class="vectorsection">
     <h3 class="headline-small">Basisvektor</h3>
-    {
-      (
-        //BasisvektorX
-        // @ts-expect-error
-        <MdFilledTextField
-          id="lineBaseX"
-          label="X-Koordinate"
-          placeholder="42,98"
-          type="number"
-          client:only="lit"
-        />
-      )
-    }
-    {
-      (
-        //BasisvektorY
-        // @ts-expect-error
-        <MdFilledTextField
-          id="lineBaseY"
-          label="Y-Koordinate"
-          placeholder="42,98"
-          type="number"
-          client:only="lit"
-        />
-      )
-    }
-    {
-      (
-        //BasisvektorZ
-        // @ts-expect-error
-        <MdFilledTextField
-          id="lineBaseZ"
-          label="Z-Koordinate"
-          placeholder="42,98"
-          type="number"
-          client:only="lit"
-        />
-      )
-    }
+    {/* Basisvektor X */}
+    <CoordinateInput id="lineBaseX" label="X-Koordinate" />
+    {/* Basisvektor Y */}
+    <CoordinateInput id="lineBaseY" label="Y-Koordinate" />
+    {/* Basisvektor Z */}
+    <CoordinateInput id="lineBaseZ" label="Z-Koordinate" />
   </div>
 </div>
 <style>

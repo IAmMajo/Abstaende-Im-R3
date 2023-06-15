@@ -1,0 +1,38 @@
+---
+import { MdFilledTextField } from "@material/web/textfield/filled-text-field";
+
+export interface Props {
+  id: string;
+  label: string;
+}
+
+const { id, label } = Astro.props;
+---
+
+{
+  (
+    // @ts-expect-error
+    <MdFilledTextField id={id} label={label} type="number" client:only="lit" />
+  )
+}
+<script>
+  addEventListener("load", () => {
+    document
+      .querySelectorAll<HTMLInputElement>("md-filled-text-field")
+      .forEach((element) => {
+        element.addEventListener("focus", generatePlaceholder);
+        element.addEventListener("input", generatePlaceholder);
+      });
+  });
+
+  function generatePlaceholder(event: Event) {
+    let placeholder = (Math.random() * 10000).toLocaleString("de", {
+      maximumFractionDigits: 2,
+      useGrouping: false,
+    });
+    if (Math.random() < 0.5) {
+      placeholder = `-${placeholder}`;
+    }
+    (event.target as HTMLInputElement).placeholder = placeholder;
+  }
+</script>
