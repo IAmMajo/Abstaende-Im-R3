@@ -16,23 +16,21 @@ const { id, label } = Astro.props;
   )
 }
 <script>
-  addEventListener("load", () => {
-    document
-      .querySelectorAll<HTMLInputElement>("md-filled-text-field")
-      .forEach((element) => {
-        element.addEventListener("focus", generatePlaceholder);
-        element.addEventListener("input", generatePlaceholder);
-      });
-  });
+  addEventListener("focusin", generatePlaceholder);
+  addEventListener("input", generatePlaceholder);
 
   function generatePlaceholder(event: Event) {
+    const target = event.target as HTMLElement;
+    if (target.tagName !== "MD-FILLED-TEXT-FIELD") {
+      return;
+    }
     let placeholder = (Math.random() * 10000).toLocaleString("de", {
-      maximumFractionDigits: 2,
       useGrouping: false,
+      maximumFractionDigits: 2,
     });
-    if (Math.random() < 0.5) {
+    if (Math.random() < 0.5 && placeholder !== "0") {
       placeholder = `-${placeholder}`;
     }
-    (event.target as HTMLInputElement).placeholder = placeholder;
+    (target as HTMLInputElement).placeholder = placeholder;
   }
 </script>

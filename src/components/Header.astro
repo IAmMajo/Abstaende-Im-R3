@@ -27,47 +27,48 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
         </MdStandardIconButton>
       )
     }
-    {
-      (
-        // @ts-expect-error
-        <MdMenu id="design-menu" client:only="lit">
-          {
-            // @ts-expect-error
-            <MdMenuItem headline="Systemeinstellung" client:only="lit">
-              <MdIcon slot="start" set:html={checkIcon} client:only="lit" />
-            </MdMenuItem>
-          }
-          {
-            // @ts-expect-error
-            <MdMenuItem headline="Hell" client:only="lit">
-              {
-                // @ts-expect-error
-                <MdIcon
-                  class="invisible"
-                  slot="start"
-                  set:html={checkIcon}
-                  client:only="lit"
-                />
-              }
-            </MdMenuItem>
-          }
-          {
-            // @ts-expect-error
-            <MdMenuItem headline="Dunkel" client:only="lit">
-              {
-                // @ts-expect-error
-                <MdIcon
-                  class="invisible"
-                  slot="start"
-                  set:html={checkIcon}
-                  client:only="lit"
-                />
-              }
-            </MdMenuItem>
-          }
-        </MdMenu>
-      )
-    }
+    <MdMenu client:only="lit">
+      {
+        (
+          // @ts-expect-error
+          <MdMenuItem headline="Systemeinstellung" client:only="lit">
+            <MdIcon slot="start" set:html={checkIcon} client:only="lit" />
+          </MdMenuItem>
+        )
+      }
+      {
+        (
+          // @ts-expect-error
+          <MdMenuItem headline="Hell" client:only="lit">
+            {
+              // @ts-expect-error
+              <MdIcon
+                class="invisible"
+                slot="start"
+                set:html={checkIcon}
+                client:only="lit"
+              />
+            }
+          </MdMenuItem>
+        )
+      }
+      {
+        (
+          // @ts-expect-error
+          <MdMenuItem headline="Dunkel" client:only="lit">
+            {
+              // @ts-expect-error
+              <MdIcon
+                class="invisible"
+                slot="start"
+                set:html={checkIcon}
+                client:only="lit"
+              />
+            }
+          </MdMenuItem>
+        )
+      }
+    </MdMenu>
   </div>
 </header>
 <style>
@@ -99,7 +100,7 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
 
   const designButton = document.getElementById("design-button")!;
   designButton.addEventListener("click", () => {
-    const menu = document.querySelector<MdMenu>("#design-menu");
+    const menu = document.querySelector<MdMenu>("md-menu");
     if (menu) {
       menu.anchor = designButton;
       menu.show();
