@@ -10,11 +10,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/lit": "^2.0.2",
+    "@astrojs/lit": "^2.1.0",
     "@fontsource/roboto": "^5.0.3",
-    "@material-symbols/svg-400": "^0.7.0",
+    "@material-symbols/svg-400": "^0.8.0",
     "@material/web": "^1.0.0-pre.10",
-    "astro": "^2.5.6",
+    "astro": "^2.6.4",
     "p5": "^1.6.0"
   },
   "volta": {
