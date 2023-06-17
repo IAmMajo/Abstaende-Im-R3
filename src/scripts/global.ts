@@ -15,7 +15,7 @@ addEventListener("input", () => {
   }
   button.disabled = !Array.from(
     document.querySelectorAll<MdFilledTextField>("md-filled-text-field")
-  ).every((coordinate) => !isNaN(coordinate.valueAsNumber));
+  ).every((coordinate) => !coordinate.validationMessage);
 });
 
 addEventListener("submit", (event) => {
