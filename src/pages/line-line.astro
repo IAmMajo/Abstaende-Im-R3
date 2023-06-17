@@ -1,8 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import DistanceButton from "../components/DistanceButton.astro";
 import Line from "../components/Line.astro";
-import Abstandbtn from "../components/Abstandbtn.astro";
-import Visual from "../components/Visual.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
@@ -14,9 +13,70 @@ import Visual from "../components/Visual.astro";
     Abstand zwischen zwei Geraden (parallel oder windschief) im
     dreidimensionalen Raum (R³) berechnen.
   </p>
-
-  <Line />
-  <Line />
-  <Abstandbtn />
-  <Visual />
+  <form>
+    <Line id="line-1" />
+    <Line id="line-2" />
+    <DistanceButton />
+  </form>
 </Layout>
+<script>
+  import type { MdFilledTextField } from "@material/web/textfield/filled-text-field";
+  import Line from "../classes/Line";
+  import Vector from "../classes/Vector";
+  import calculateLineLineDistance from "../scripts/calculateLineLineDistance";
+  import createResultElement from "../scripts/createResultElement";
+  import sketch from "../scripts/sketch";
+
+  addEventListener("submit", () => {
+    const line1 = new Line(
+      new Vector(
+        document.querySelector<MdFilledTextField>(
+          "#line-1-base-x"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#line-1-base-y"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#line-1-base-z"
+        )!.valueAsNumber
+      ),
+      new Vector(
+        document.querySelector<MdFilledTextField>(
+          "#line-1-direction-x"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#line-1-direction-y"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#line-1-direction-z"
+        )!.valueAsNumber
+      )
+    );
+    const line2 = new Line(
+      new Vector(
+        document.querySelector<MdFilledTextField>(
+          "#line-2-base-x"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#line-2-base-y"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#line-2-base-z"
+        )!.valueAsNumber
+      ),
+      new Vector(
+        document.querySelector<MdFilledTextField>(
+          "#line-2-direction-x"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#line-2-direction-y"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#line-2-direction-z"
+        )!.valueAsNumber
+      )
+    );
+    createResultElement(calculateLineLineDistance(line1, line2));
+    sketch(line1, line2);
+  });
+</script>

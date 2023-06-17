@@ -1,0 +1,12 @@
+---
+import { MdFilledButton } from "@material/web/button/filled-button";
+---
+
+{
+  (
+    // @ts-expect-error
+    <MdFilledButton disabled type="submit" client:only="lit">
+      Abstand berechnen
+    </MdFilledButton>
+  )
+}

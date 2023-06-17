@@ -1,27 +1,23 @@
 ---
-import CoordinateInput from "./CoordinateInput.astro";
+import Vector from "./Vector.astro";
+
+export interface Props {
+  id: string;
+}
+
+const id = Astro.props.id;
 ---
 
 <h3 class="headline-medium">Gerade</h3>
 <div class="container">
   <div class="vectorsection">
     <h3 class="headline-small">Richtungsvektor</h3>
-    {/* Richtungsvektor X */}
-    <CoordinateInput id="lineDirX" label="X-Koordinate" />
-    {/* Richtungsvektor Y */}
-    <CoordinateInput id="lineDirY" label="Y-Koordinate" />
-    {/* Richtungsvektor Z */}
-    <CoordinateInput id="lineDirZ" label="Z-Koordinate" />
+    <Vector id={`${id}-direction`} />
   </div>
 
   <div class="vectorsection">
     <h3 class="headline-small">Basisvektor</h3>
-    {/* Basisvektor X */}
-    <CoordinateInput id="lineBaseX" label="X-Koordinate" />
-    {/* Basisvektor Y */}
-    <CoordinateInput id="lineBaseY" label="Y-Koordinate" />
-    {/* Basisvektor Z */}
-    <CoordinateInput id="lineBaseZ" label="Z-Koordinate" />
+    <Vector id={`${id}-base`} />
   </div>
 </div>
 <style>
@@ -33,7 +29,6 @@ import CoordinateInput from "./CoordinateInput.astro";
 
   .vectorsection {
     display: flex;
-    margin: 0 30px;
     justify-content: center;
     flex-direction: column;
   }

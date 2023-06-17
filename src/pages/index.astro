@@ -1,10 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
-
-import Point from "../components/Point.astro";
+import DistanceButton from "../components/DistanceButton.astro";
 import Line from "../components/Line.astro";
-import Abstandbtn from "../components/Abstandbtn.astro";
-import Visual from "../components/Visual.astro";
+import Point from "../components/Point.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
@@ -16,8 +14,49 @@ import Visual from "../components/Visual.astro";
     Abstand zwischen einem Punkt und einer Gerade im dreidimensionalen Raum (R³)
     berechnen.
   </p>
-  <Point />
-  <Line />
-  <Abstandbtn />
-  <Visual />
+  <form>
+    <Point />
+    <Line id="line" />
+    <DistanceButton />
+  </form>
 </Layout>
+<script>
+  import type { MdFilledTextField } from "@material/web/textfield/filled-text-field";
+  import Line from "../classes/Line";
+  import Vector from "../classes/Vector";
+  import calculatePointLineDistance from "../scripts/calculatePointLineDistance";
+  import createResultElement from "../scripts/createResultElement";
+  import sketch from "../scripts/sketch";
+
+  addEventListener("submit", () => {
+    const point = new Vector(
+      document.querySelector<MdFilledTextField>("#point-x")!.valueAsNumber,
+      document.querySelector<MdFilledTextField>("#point-y")!.valueAsNumber,
+      document.querySelector<MdFilledTextField>("#point-z")!.valueAsNumber
+    );
+    const line = new Line(
+      new Vector(
+        document.querySelector<MdFilledTextField>(
+          "#line-base-x"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#line-base-y"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>("#line-base-z")!.valueAsNumber
+      ),
+      new Vector(
+        document.querySelector<MdFilledTextField>(
+          "#line-direction-x"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#line-direction-y"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#line-direction-z"
+        )!.valueAsNumber
+      )
+    );
+    createResultElement(calculatePointLineDistance(point, line));
+    sketch(point, line);
+  });
+</script>

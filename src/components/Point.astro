@@ -1,17 +1,12 @@
 ---
-import CoordinateInput from "./CoordinateInput.astro";
+import Vector from "./Vector.astro";
 ---
 
 <h3 class="headline-medium">Punkt</h3>
 <div class="container">
   <div class="vectorsection">
     <h3 class="headline-small">Vektor</h3>
-    {/* Vektor X */}
-    <CoordinateInput id="pointX" label="X-Koordinate" />
-    {/* Vektor Y */}
-    <CoordinateInput id="pointY" label="Y-Koordinate" />
-    {/* Vektor Z */}
-    <CoordinateInput id="pointZ" label="Z-Koordinate" />
+    <Vector id="point" />
   </div>
 </div>
 <style>
@@ -23,7 +18,6 @@ import CoordinateInput from "./CoordinateInput.astro";
 
   .vectorsection {
     display: flex;
-    margin: 0 30px;
     justify-content: center;
     flex-direction: column;
   }

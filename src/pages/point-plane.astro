@@ -1,9 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import DistanceButton from "../components/DistanceButton.astro";
+import Plane from "../components/Plane.astro";
 import Point from "../components/Point.astro";
-import Plane from "../components/plane.astro";
-import Abstandbtn from "../components/Abstandbtn.astro";
-import Visual from "../components/Visual.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
@@ -15,9 +14,62 @@ import Visual from "../components/Visual.astro";
     Abstand zwischen einem Punkt und einer Ebene im dreidimensionalen Raum (R³)
     berechnen.
   </p>
-
-  <Point />
-  <Plane />
-  <Abstandbtn />
-  <Visual />
+  <form>
+    <Point />
+    <Plane />
+    <DistanceButton />
+  </form>
 </Layout>
+<script>
+  import type { MdFilledTextField } from "@material/web/textfield/filled-text-field";
+  import Plane from "../classes/Plane";
+  import Vector from "../classes/Vector";
+  import calculatePointPlaneDistance from "../scripts/calculatePointPlaneDistance";
+  import createResultElement from "../scripts/createResultElement";
+  import sketch from "../scripts/sketch";
+
+  addEventListener("submit", () => {
+    const point = new Vector(
+      document.querySelector<MdFilledTextField>("#point-x")!.valueAsNumber,
+      document.querySelector<MdFilledTextField>("#point-y")!.valueAsNumber,
+      document.querySelector<MdFilledTextField>("#point-z")!.valueAsNumber
+    );
+    const plane = new Plane(
+      new Vector(
+        document.querySelector<MdFilledTextField>(
+          "#plane-base-x"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#plane-base-y"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#plane-base-z"
+        )!.valueAsNumber
+      ),
+      new Vector(
+        document.querySelector<MdFilledTextField>(
+          "#plane-direction-1-x"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#plane-direction-1-y"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#plane-direction-1-z"
+        )!.valueAsNumber
+      ),
+      new Vector(
+        document.querySelector<MdFilledTextField>(
+          "#plane-direction-2-x"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#plane-direction-2-y"
+        )!.valueAsNumber,
+        document.querySelector<MdFilledTextField>(
+          "#plane-direction-2-z"
+        )!.valueAsNumber
+      )
+    );
+    createResultElement(calculatePointPlaneDistance(point, plane));
+    sketch(point, plane);
+  });
+</script>

@@ -10,16 +10,31 @@ p {
   margin: 0;
 }
 
-md-filled-button {
-  width: fit-content;
-}
-
 md-icon {
   line-height: 0;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin);
+}
+
+md-filled-button {
+  width: fit-content;
+  margin: auto;
+}
+
 md-menu-item md-icon {
   margin-left: 16px;
+}
+
+#result {
+  font-size: 20px;
+  margin: auto;
+  padding: 10px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgb(148, 148, 148);
 }
 
 .invisible {

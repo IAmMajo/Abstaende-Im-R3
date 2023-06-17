@@ -3,16 +3,51 @@ import { MdFilledTextField } from "@material/web/textfield/filled-text-field";
 
 export interface Props {
   id: string;
-  label: string;
 }
 
-const { id, label } = Astro.props;
+const id = Astro.props.id;
 ---
 
 {
   (
+    // Vektor X
     // @ts-expect-error
-    <MdFilledTextField id={id} label={label} type="number" client:only="lit" />
+    <MdFilledTextField
+      id={`${id}-x`}
+      label="X-Koordinate"
+      type="number"
+      required
+      step="any"
+      client:only="lit"
+    />
+  )
+}
+{
+  (
+    // Vektor Y
+    // @ts-expect-error
+    <MdFilledTextField
+      id={`${id}-y`}
+      label="Y-Koordinate"
+      type="number"
+      required
+      step="any"
+      client:only="lit"
+    />
+  )
+}
+{
+  (
+    // Vektor Z
+    // @ts-expect-error
+    <MdFilledTextField
+      id={`${id}-z`}
+      label="Z-Koordinate"
+      type="number"
+      required
+      step="any"
+      client:only="lit"
+    />
   )
 }
 <script>

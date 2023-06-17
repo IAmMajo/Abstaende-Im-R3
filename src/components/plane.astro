@@ -1,37 +1,22 @@
 ---
-import CoordinateInput from "./CoordinateInput.astro";
+import Vector from "./Vector.astro";
 ---
 
 <h3 class="headline-medium">Ebene</h3>
 <div class="container">
   <div class="vectorsection">
     <h3 class="headline-small">Richtungsvektor 1</h3>
-    {/* Richtungsvektor 1 X */}
-    <CoordinateInput id="planeDir1X" label="X-Koordinate" />
-    {/* Richtungsvektor 1 Y */}
-    <CoordinateInput id="planeDir1Y" label="Y-Koordinate" />
-    {/* Richtungsvektor 1 Z */}
-    <CoordinateInput id="planeDir1Z" label="Z-Koordinate" />
+    <Vector id="plane-direction-1" />
   </div>
 
   <div class="vectorsection">
     <h3 class="headline-small">Richtungsvektor 2</h3>
-    {/* Richtungsvektor 2 X */}
-    <CoordinateInput id="planeDir2X" label="X-Koordinate" />
-    {/* Richtungsvektor 2 Y */}
-    <CoordinateInput id="planeDir2Y" label="Y-Koordinate" />
-    {/* Richtungsvektor 2 Z */}
-    <CoordinateInput id="planeDir2Z" label="Z-Koordinate" />
+    <Vector id="plane-direction-2" />
   </div>
 
   <div class="vectorsection">
     <h3 class="headline-small">Ortsvektor</h3>
-    {/* Ortsvektor X */}
-    <CoordinateInput id="planeBaseX" label="X-Koordinate" />
-    {/* Ortsvektor Y */}
-    <CoordinateInput id="planeBaseY" label="Y-Koordinate" />
-    {/* Ortsvektor Z */}
-    <CoordinateInput id="planeBaseZ" label="Z-Koordinate" />
+    <Vector id="plane-base" />
   </div>
 </div>
 <style>
@@ -43,7 +28,6 @@ import CoordinateInput from "./CoordinateInput.astro";
 
   .vectorsection {
     display: flex;
-    margin: 0 30px;
     justify-content: center;
     flex-direction: column;
   }
