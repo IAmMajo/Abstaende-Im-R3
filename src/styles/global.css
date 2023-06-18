@@ -14,14 +14,25 @@ md-icon {
   line-height: 0;
 }
 
-form {
+.column {
   display: flex;
   flex-direction: column;
   gap: var(--margin);
 }
 
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--margin) 48px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(176px, auto));
+  gap: var(--margin);
+}
+
 md-filled-button {
-  width: fit-content;
   margin: auto;
 }
 

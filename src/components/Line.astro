@@ -3,33 +3,27 @@ import Vector from "./Vector.astro";
 
 export interface Props {
   id: string;
+  headline: string;
 }
 
-const id = Astro.props.id;
+const { id, headline } = Astro.props;
 ---
 
-<h3 class="headline-medium">Gerade</h3>
-<div class="container">
-  <div class="vectorsection">
-    <h3 class="headline-small">Richtungsvektor</h3>
-    <Vector id={`${id}-direction`} />
-  </div>
-
-  <div class="vectorsection">
-    <h3 class="headline-small">Basisvektor</h3>
-    <Vector id={`${id}-base`} />
+<div class="column">
+  <h3 class="headline-medium">{headline}</h3>
+  <div class="grid">
+    <div class="column">
+      <h3 class="title-large">Ortsvektor</h3>
+      <Vector id={`${id}-base`} />
+    </div>
+    <div class="column">
+      <h3 class="title-large">Richtungsvektor</h3>
+      <Vector id={`${id}-direction`} />
+    </div>
   </div>
 </div>
 <style>
-  .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: var(--margin);
-  }
-
-  .vectorsection {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  .column {
+    flex: 2 376px;
   }
 </style>

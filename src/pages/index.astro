@@ -14,12 +14,17 @@ import Layout from "../layouts/Layout.astro";
     Abstand zwischen einem Punkt und einer Gerade im dreidimensionalen Raum (R³)
     berechnen.
   </p>
-  <form>
-    <Point />
-    <Line id="line" />
+  <form class="column">
+    <div class="row">
+      <Point />
+      <Line id="line" headline="Gerade" />
+    </div>
     <DistanceButton />
   </form>
 </Layout>
+<style>
+
+</style>
 <script>
   import type { MdFilledTextField } from "@material/web/textfield/filled-text-field";
   import Line from "../classes/Line";

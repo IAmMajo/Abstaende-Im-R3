@@ -2,33 +2,25 @@
 import Vector from "./Vector.astro";
 ---
 
-<h3 class="headline-medium">Ebene</h3>
-<div class="container">
-  <div class="vectorsection">
-    <h3 class="headline-small">Richtungsvektor 1</h3>
-    <Vector id="plane-direction-1" />
-  </div>
-
-  <div class="vectorsection">
-    <h3 class="headline-small">Richtungsvektor 2</h3>
-    <Vector id="plane-direction-2" />
-  </div>
-
-  <div class="vectorsection">
-    <h3 class="headline-small">Ortsvektor</h3>
-    <Vector id="plane-base" />
+<div class="column">
+  <h3 class="headline-medium">Ebene</h3>
+  <div class="grid">
+    <div class="column">
+      <h3 class="title-large">Ortsvektor</h3>
+      <Vector id="plane-base" />
+    </div>
+    <div class="column">
+      <h3 class="title-large">Richtungsvektor 1</h3>
+      <Vector id="plane-direction-1" />
+    </div>
+    <div class="column">
+      <h3 class="title-large">Richtungsvektor 2</h3>
+      <Vector id="plane-direction-2" />
+    </div>
   </div>
 </div>
 <style>
-  .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: var(--margin);
-  }
-
-  .vectorsection {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  .column {
+    flex: 3 576px;
   }
 </style>

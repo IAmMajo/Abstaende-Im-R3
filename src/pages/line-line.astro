@@ -13,9 +13,11 @@ import Layout from "../layouts/Layout.astro";
     Abstand zwischen zwei Geraden (parallel oder windschief) im
     dreidimensionalen Raum (R³) berechnen.
   </p>
-  <form>
-    <Line id="line-1" />
-    <Line id="line-2" />
+  <form class="column">
+    <div class="row">
+      <Line id="line-1" headline="Gerade 1" />
+      <Line id="line-2" headline="Gerade 2" />
+    </div>
     <DistanceButton />
   </form>
 </Layout>

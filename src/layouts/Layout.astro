@@ -26,7 +26,7 @@ const { title, description } = Astro.props;
   </head>
   <body class="surface on-surface-text body-medium">
     <Header />
-    <main>
+    <main class="column">
       <slot />
     </main>
     <Navigation />
@@ -39,9 +39,6 @@ const { title, description } = Astro.props;
   }
 
   main {
-    display: flex;
-    flex-direction: column;
-    gap: var(--margin);
     max-width: 1200px;
     margin: auto;
   }

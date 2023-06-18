@@ -2,23 +2,21 @@
 import Vector from "./Vector.astro";
 ---
 
-<h3 class="headline-medium">Punkt</h3>
-<div class="container">
-  <div class="vectorsection">
-    <h3 class="headline-small">Vektor</h3>
+<div class="column">
+  <h3 class="headline-medium">Punkt</h3>
+  <div class="grid">
     <Vector id="point" />
   </div>
 </div>
 <style>
-  .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: var(--margin);
+  .column {
+    justify-content: space-between;
+    flex: 1 176px;
   }
 
-  .vectorsection {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  @media (min-width: 1608px) {
+    div {
+      grid-template-columns: auto !important;
+    }
   }
 </style>
