@@ -6,7 +6,7 @@ import type Plane from "../classes/Plane";
 import Vector from "../classes/Vector";
 
 const main = document.querySelector("main")!;
-const htmlStyle = getComputedStyle(document.documentElement);
+const bodyStyle = getComputedStyle(document.body);
 let p5Class: typeof p5 | null = null;
 let P5VectorClass: typeof P5Vector | null = null;
 let sketch: p5 | null = null;
@@ -33,7 +33,7 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
       p5.createCanvas(1200, 800, p5.WEBGL);
     };
     p5.draw = () => {
-      p5.background(htmlStyle.getPropertyValue("--md-sys-color-surface"));
+      p5.background(bodyStyle.getPropertyValue("--sketch-background"));
       geometrics.forEach((geometric) => {
         if (geometric instanceof Vector) {
           p5.push();

@@ -4,6 +4,10 @@
   user-select: none;
 }
 
+body {
+  --sketch-background: var(--md-sys-color-surface);
+}
+
 h2,
 h3,
 p {

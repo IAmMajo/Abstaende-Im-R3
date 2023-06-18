@@ -1,13 +1,6 @@
 import type { MdFilledButton } from "@material/web/button/filled-button";
 import type { MdFilledTextField } from "@material/web/textfield/filled-text-field";
 
-const design = localStorage.getItem("design");
-if (design) {
-  document.body.classList.add(design);
-  document.querySelector<HTMLMetaElement>('[name="color-scheme"]')!.content =
-    design;
-}
-
 const form = document.querySelector<HTMLFormElement>("form")!;
 addEventListener("input", () => {
   let button = document.querySelector<MdFilledButton>("md-filled-button");

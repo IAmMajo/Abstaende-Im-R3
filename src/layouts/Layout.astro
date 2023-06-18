@@ -25,6 +25,13 @@ const props = Astro.props;
     <title>{props.title} | Abstände im R³</title>
   </head>
   <body class="surface on-surface-text body-medium">
+    <script is:inline>
+      const design = localStorage.getItem("design");
+      if (design) {
+        document.body.classList.add(design);
+        document.querySelector('[name="color-scheme"]').content = design;
+      }
+    </script>
     <Header />
     <main class="column">
       <slot />
