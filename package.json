@@ -6,11 +6,10 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "wrangler pages dev dist",
+    "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^6.5.0",
     "@astrojs/lit": "^2.1.0",
     "@fontsource/roboto": "^5.0.3",
     "@material-symbols/svg-400": "^0.8.0",

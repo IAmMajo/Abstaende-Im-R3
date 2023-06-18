@@ -6,8 +6,6 @@ import { MdIcon } from "@material/web/icon/icon";
 import { MdStandardIconButton } from "@material/web/iconbutton/standard-icon-button";
 import { MdMenu } from "@material/web/menu/menu";
 import { MdMenuItem } from "@material/web/menu/menu-item";
-
-const design = Astro.cookies.get("design").value;
 ---
 
 <header class="surface">
@@ -34,12 +32,15 @@ const design = Astro.cookies.get("design").value;
         (
           // @ts-expect-error
           <MdMenuItem headline="Systemeinstellung" client:only="lit">
-            <MdIcon
-              class:list={[{ invisible: design }]}
-              slot="start"
-              set:html={checkIcon}
-              client:only="lit"
-            />
+            {
+              // @ts-expect-error
+              <MdIcon
+                class="invisible"
+                slot="start"
+                set:html={checkIcon}
+                client:only="lit"
+              />
+            }
           </MdMenuItem>
         )
       }
@@ -48,8 +49,9 @@ const design = Astro.cookies.get("design").value;
           // @ts-expect-error
           <MdMenuItem headline="Hell" data-value="light" client:only="lit">
             {
+              // @ts-expect-error
               <MdIcon
-                class:list={[{ invisible: design !== "light" }]}
+                class="invisible"
                 slot="start"
                 set:html={checkIcon}
                 client:only="lit"
@@ -63,8 +65,9 @@ const design = Astro.cookies.get("design").value;
           // @ts-expect-error
           <MdMenuItem headline="Dunkel" data-value="dark" client:only="lit">
             {
+              // @ts-expect-error
               <MdIcon
-                class:list={[{ invisible: design !== "dark" }]}
+                class="invisible"
                 slot="start"
                 set:html={checkIcon}
                 client:only="lit"
@@ -108,10 +111,12 @@ const design = Astro.cookies.get("design").value;
   const designButton = document.getElementById("design-button")!;
   designButton.addEventListener("click", () => {
     const menu = document.querySelector<MdMenu>("md-menu");
-    if (menu) {
-      menu.anchor = designButton;
-      menu.show();
+    if (!menu) {
+      return;
     }
+    refreshSelectedDesign();
+    menu.anchor = designButton;
+    menu.show();
   });
 
   const bodyClasses = document.body.classList;
@@ -119,25 +124,18 @@ const design = Astro.cookies.get("design").value;
     '[name="color-scheme"]'
   )!;
   addEventListener("close-menu", (event) => {
-    document
-      .querySelectorAll<MdIcon>("md-menu-item md-icon")
-      .forEach((icon) => icon.classList.add("invisible"));
     bodyClasses.remove("light", "dark");
     const target = event.target as MdMenuItem;
     const design = target.dataset.value;
-    if (!design) {
-      document
-        .querySelector<MdIcon>("md-menu-item md-icon")!
-        .classList.remove("invisible");
+    if (design) {
+      bodyClasses.add(design);
+      colorScheme.content = design;
+      localStorage.setItem("design", design);
+    } else {
       colorScheme.content = "light dark";
-      document.cookie = "design=;max-age=0";
-      return;
+      localStorage.removeItem("design");
     }
-    bodyClasses.add(design);
-    target.querySelector<MdIcon>("md-icon")!.classList.remove("invisible");
-    colorScheme.content = design;
-    document.cookie =
-      "design=" + design + ";max-age=34560000;path=/;samesite=lax;secure";
+    refreshSelectedDesign();
   });
 
   const headerClasses = document.querySelector("header")!.classList;
@@ -148,4 +146,20 @@ const design = Astro.cookies.get("design").value;
     }
     headerClasses.add("surface-container");
   });
+
+  function refreshSelectedDesign() {
+    document
+      .querySelectorAll<MdIcon>("md-menu-item md-icon")
+      .forEach((icon) => icon.classList.add("invisible"));
+    const design = localStorage.getItem("design");
+    if (!design) {
+      document
+        .querySelector<MdIcon>("md-menu-item md-icon")
+        ?.classList.remove("invisible");
+      return;
+    }
+    document
+      .querySelector<MdIcon>(`[data-value="${design}"] md-icon`)
+      ?.classList.remove("invisible");
+  }
 </script>
