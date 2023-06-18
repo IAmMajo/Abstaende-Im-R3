@@ -11,20 +11,25 @@ export interface Props {
   description: string;
 }
 
-const { title, description } = Astro.props;
+const props = Astro.props;
+const design = Astro.cookies.get("design").value;
+let classes = "surface on-surface-text body-medium";
+if (design) {
+  classes += ` ${design}`;
+}
 ---
 
 <!DOCTYPE html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
+    <meta name="description" content={props.description} />
     <meta name="viewport" content="width=device-width" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content={design || "light dark"} />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} | Abstände im R³</title>
+    <title>{props.title} | Abstände im R³</title>
   </head>
-  <body class="surface on-surface-text body-medium">
+  <body class={classes}>
     <Header />
     <main class="column">
       <slot />

@@ -6,6 +6,8 @@ import { MdIcon } from "@material/web/icon/icon";
 import { MdStandardIconButton } from "@material/web/iconbutton/standard-icon-button";
 import { MdMenu } from "@material/web/menu/menu";
 import { MdMenuItem } from "@material/web/menu/menu-item";
+
+const design = Astro.cookies.get("design").value;
 ---
 
 <header class="surface">
@@ -32,18 +34,22 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
         (
           // @ts-expect-error
           <MdMenuItem headline="Systemeinstellung" client:only="lit">
-            <MdIcon slot="start" set:html={checkIcon} client:only="lit" />
+            <MdIcon
+              class:list={[{ invisible: design }]}
+              slot="start"
+              set:html={checkIcon}
+              client:only="lit"
+            />
           </MdMenuItem>
         )
       }
       {
         (
           // @ts-expect-error
-          <MdMenuItem headline="Hell" client:only="lit">
+          <MdMenuItem headline="Hell" data-value="light" client:only="lit">
             {
-              // @ts-expect-error
               <MdIcon
-                class="invisible"
+                class:list={[{ invisible: design !== "light" }]}
                 slot="start"
                 set:html={checkIcon}
                 client:only="lit"
@@ -55,11 +61,10 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
       {
         (
           // @ts-expect-error
-          <MdMenuItem headline="Dunkel" client:only="lit">
+          <MdMenuItem headline="Dunkel" data-value="dark" client:only="lit">
             {
-              // @ts-expect-error
               <MdIcon
-                class="invisible"
+                class:list={[{ invisible: design !== "dark" }]}
                 slot="start"
                 set:html={checkIcon}
                 client:only="lit"
@@ -96,7 +101,9 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
   }
 </style>
 <script>
+  import type { MdIcon } from "@material/web/icon/icon";
   import type { MdMenu } from "@material/web/menu/menu";
+  import type { MdMenuItem } from "@material/web/menu/menu-item";
 
   const designButton = document.getElementById("design-button")!;
   designButton.addEventListener("click", () => {
@@ -105,6 +112,32 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
       menu.anchor = designButton;
       menu.show();
     }
+  });
+
+  const bodyClasses = document.body.classList;
+  const colorScheme = document.querySelector<HTMLMetaElement>(
+    '[name="color-scheme"]'
+  )!;
+  addEventListener("close-menu", (event) => {
+    document
+      .querySelectorAll<MdIcon>("md-menu-item md-icon")
+      .forEach((icon) => icon.classList.add("invisible"));
+    bodyClasses.remove("light", "dark");
+    const target = event.target as MdMenuItem;
+    const design = target.dataset.value;
+    if (!design) {
+      document
+        .querySelector<MdIcon>("md-menu-item md-icon")!
+        .classList.remove("invisible");
+      colorScheme.content = "light dark";
+      document.cookie = "design=;max-age=0";
+      return;
+    }
+    bodyClasses.add(design);
+    target.querySelector<MdIcon>("md-icon")!.classList.remove("invisible");
+    colorScheme.content = design;
+    document.cookie =
+      "design=" + design + ";max-age=34560000;path=/;samesite=lax;secure";
   });
 
   const headerClasses = document.querySelector("header")!.classList;
