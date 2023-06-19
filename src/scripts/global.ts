@@ -2,7 +2,6 @@ import type { MdFilledButton } from "@material/web/button/filled-button";
 import type { MdFilledTextField } from "@material/web/textfield/filled-text-field";
 
 const form = document.querySelector<HTMLFormElement>("form")!;
-
 addEventListener("input", () => {
   let button = document.querySelector<MdFilledButton>("md-filled-button");
   if (!button) {

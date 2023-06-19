@@ -6,7 +6,7 @@ import type Plane from "../classes/Plane";
 import Vector from "../classes/Vector";
 
 const main = document.querySelector("main")!;
-const htmlStyle = getComputedStyle(document.documentElement);
+const bodyStyle = getComputedStyle(document.body);
 let p5Class: typeof p5 | null = null;
 let P5VectorClass: typeof P5Vector | null = null;
 let sketch: p5 | null = null;

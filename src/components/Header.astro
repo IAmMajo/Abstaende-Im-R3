@@ -32,14 +32,6 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
         (
           // @ts-expect-error
           <MdMenuItem headline="Systemeinstellung" client:only="lit">
-            <MdIcon slot="start" set:html={checkIcon} client:only="lit" />
-          </MdMenuItem>
-        )
-      }
-      {
-        (
-          // @ts-expect-error
-          <MdMenuItem headline="Hell" client:only="lit">
             {
               // @ts-expect-error
               <MdIcon
@@ -55,7 +47,23 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
       {
         (
           // @ts-expect-error
-          <MdMenuItem headline="Dunkel" client:only="lit">
+          <MdMenuItem headline="Hell" data-value="light" client:only="lit">
+            {
+              // @ts-expect-error
+              <MdIcon
+                class="invisible"
+                slot="start"
+                set:html={checkIcon}
+                client:only="lit"
+              />
+            }
+          </MdMenuItem>
+        )
+      }
+      {
+        (
+          // @ts-expect-error
+          <MdMenuItem headline="Dunkel" data-value="dark" client:only="lit">
             {
               // @ts-expect-error
               <MdIcon
@@ -96,15 +104,38 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
   }
 </style>
 <script>
+  import type { MdIcon } from "@material/web/icon/icon";
   import type { MdMenu } from "@material/web/menu/menu";
+  import type { MdMenuItem } from "@material/web/menu/menu-item";
 
   const designButton = document.getElementById("design-button")!;
   designButton.addEventListener("click", () => {
     const menu = document.querySelector<MdMenu>("md-menu");
-    if (menu) {
-      menu.anchor = designButton;
-      menu.show();
+    if (!menu) {
+      return;
     }
+    refreshSelectedDesign();
+    menu.anchor = designButton;
+    menu.show();
+  });
+
+  const bodyClasses = document.body.classList;
+  const colorScheme = document.querySelector<HTMLMetaElement>(
+    '[name="color-scheme"]'
+  )!;
+  addEventListener("close-menu", (event) => {
+    bodyClasses.remove("light", "dark");
+    const target = event.target as MdMenuItem;
+    const design = target.dataset.value;
+    if (design) {
+      bodyClasses.add(design);
+      colorScheme.content = design;
+      localStorage.setItem("design", design);
+    } else {
+      colorScheme.content = "light dark";
+      localStorage.removeItem("design");
+    }
+    refreshSelectedDesign();
   });
 
   const headerClasses = document.querySelector("header")!.classList;
@@ -115,4 +146,20 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
     }
     headerClasses.add("surface-container");
   });
+
+  function refreshSelectedDesign() {
+    document
+      .querySelectorAll<MdIcon>("md-menu-item md-icon")
+      .forEach((icon) => icon.classList.add("invisible"));
+    const design = localStorage.getItem("design");
+    if (!design) {
+      document
+        .querySelector<MdIcon>("md-menu-item md-icon")
+        ?.classList.remove("invisible");
+      return;
+    }
+    document
+      .querySelector<MdIcon>(`[data-value="${design}"] md-icon`)
+      ?.classList.remove("invisible");
+  }
 </script>
