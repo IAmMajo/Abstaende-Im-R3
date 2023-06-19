@@ -34,6 +34,7 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
     };
     p5.draw = () => {
       p5.background(htmlStyle.getPropertyValue("--md-sys-color-surface"));
+      p5.rotateY(p5.millis() / 1000);
       geometrics.forEach((geometric) => {
         if (geometric instanceof Vector) {
           p5.push();
