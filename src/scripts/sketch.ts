@@ -33,7 +33,7 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
       p5.createCanvas(1200, 800, p5.WEBGL);
     };
     p5.draw = () => {
-      p5.background(bodyStyle.getPropertyValue("--md-sys-color-surface"));
+      p5.background(bodyStyle.getPropertyValue("--sketch-background"));
       p5.rotateY(p5.millis() / 1000);
       geometrics.forEach((geometric) => {
         if (geometric instanceof Vector) {
