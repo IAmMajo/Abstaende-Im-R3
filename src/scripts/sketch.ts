@@ -30,7 +30,7 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
   }
   sketch = new p5Class((p5: p5) => {
     p5.setup = () => {
-      p5.createCanvas(1200, 800, p5.WEBGL);
+      p5.createCanvas(1200, 1200, p5.WEBGL);
     };
     p5.draw = () => {
       p5.background(bodyStyle.getPropertyValue("--sketch-background"));
@@ -40,7 +40,7 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
       geometrics.forEach((geometric) => {
         if (geometric instanceof Vector) {
           p5.push();
-          p5.translate(geometric.x, geometric.y, geometric.z);
+          p5.translate(geometric.x, -geometric.z, -geometric.y);
           p5.noStroke();
           p5.fill(0, 0, 255);
           p5.sphere(10);
@@ -52,32 +52,35 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
             geometric;
           const p5Base = new P5VectorClass!(
             geometricBase.x,
-            geometricBase.y,
-            geometricBase.z
+            -geometricBase.z,
+            -geometricBase.y
           );
           const p5Direction = new P5VectorClass!(
             geometricDirection.x,
-            geometricDirection.y,
-            geometricDirection.z
-          );
-
-          const normalizedDirection = p5Direction.copy().normalize();
-          const lineLength = 1201;
-          const start = p5Base
-            .copy()
-            .add(normalizedDirection.copy().mult(-lineLength));
-          const end = p5Base
-            .copy()
-            .add(normalizedDirection.copy().mult(lineLength));
+            -geometricDirection.z,
+            -geometricDirection.y
+          ).normalize();
+          const start = p5Base.copy().sub(p5Direction.copy().mult(1200));
+          const end = p5Base.copy().add(p5Direction.copy().mult(1200));
 
           p5.push();
           p5.noFill();
           p5.stroke(255, 0, 0);
           p5.strokeWeight(10);
-          console.log(start.x, start.y, start.z, end.x, end.y, end.z);
-          p5.line(start.x, start.y, start.z, end.x, end.y, end.z);
-          p5.pop();
 
+          /*
+           * This would be better but doesn't work because it is not possible to
+           * first do rotateX and then rotateY.
+           *
+           * p5.translate(p5Base.x, p5Base.y, p5Base.z);
+           * p5.rotateX(new P5VectorClass!(0, -1, 0).angleBetween(p5Direction));
+           * p5.rotateY(new P5VectorClass!(0, 0, 1).angleBetween(p5Direction));
+           * p5.cylinder(10, 2400);
+           */
+
+          p5.line(start.x, start.y, start.z, end.x, end.y, end.z);
+
+          p5.pop();
           return;
         }
         const {
@@ -87,25 +90,25 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
         } = geometric;
         const p5Base = new P5VectorClass!(
           geometricBase.x,
-          geometricBase.y,
-          geometricBase.z
+          -geometricBase.z,
+          -geometricBase.y
         );
         const p5Direction1 = new P5VectorClass!(
           geometricDirection1.x,
-          geometricDirection1.y,
-          geometricDirection1.z
+          -geometricDirection1.z,
+          -geometricDirection1.y
         );
         const p5Direction2 = new P5VectorClass!(
           geometricDirection2.x,
-          geometricDirection2.y,
-          geometricDirection2.z
+          -geometricDirection2.z,
+          -geometricDirection2.y
         );
 
         p5.push();
         p5.translate(p5Base.x, p5Base.y, p5Base.z);
         p5.noStroke();
         p5.fill(0, 255, 0, 80);
-        p5.plane(1201, 1201);
+        p5.plane(2400, 2400);
         p5.pop();
 
         return;
