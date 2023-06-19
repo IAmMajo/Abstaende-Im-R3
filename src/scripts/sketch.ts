@@ -35,6 +35,8 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
     p5.draw = () => {
       p5.background(bodyStyle.getPropertyValue("--sketch-background"));
       p5.rotateY(p5.millis() / 1000);
+      p5.directionalLight(0, 0, 250, 125, 200, 0.25);
+      p5.ambientMaterial(255);
       geometrics.forEach((geometric) => {
         if (geometric instanceof Vector) {
           p5.push();
