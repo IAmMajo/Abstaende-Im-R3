@@ -1,12 +1,14 @@
 import type { MdFilledButton } from "@material/web/button/filled-button";
+import type { MdSlider } from "@material/web/slider/slider";
 import type { MdFilledTextField } from "@material/web/textfield/filled-text-field";
 
 const form = document.querySelector<HTMLFormElement>("form")!;
-addEventListener("input", () => {
+form.addEventListener("input", () => {
   let button = document.querySelector<MdFilledButton>("md-filled-button");
   if (!button) {
     document.querySelector<HTMLParagraphElement>("#result")!.remove();
     document.querySelector<HTMLDivElement>("#sketch")!.remove();
+    document.querySelector<MdSlider>("md-slider")!.remove();
     button = document.createElement("md-filled-button");
     button.type = "submit";
     button.textContent = "Abstand berechnen";

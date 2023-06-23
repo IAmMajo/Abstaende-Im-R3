@@ -1,4 +1,5 @@
 import "@material/web/circularprogress/circular-progress";
+import "@material/web/slider/slider";
 import type p5 from "p5";
 import type { Vector as P5Vector } from "p5";
 import Line from "../classes/Line";
@@ -14,7 +15,9 @@ let sketch: p5 | null = null;
 export default async (...geometrics: (Vector | Line | Plane)[]) => {
   const sketchElement = document.createElement("div");
   sketchElement.id = "sketch";
-  main.appendChild(sketchElement);
+  const slider = document.createElement("md-slider");
+  slider.labeled = true;
+  main.append(sketchElement, slider);
   if (p5Class && P5VectorClass) {
     sketch?.remove();
   } else {
