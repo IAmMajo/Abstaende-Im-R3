@@ -1,0 +1,57 @@
+<div id="slidercontainer" class="slidecontainer">
+  <input
+    type="range"
+    value="180"
+    min="1"
+    max="360"
+    class="slider"
+    id="myRange"
+    onchange = "this.nextElementSibling.value = this.value + ' Grad'"
+  />
+  <output class="outputdisplay"></output>
+</div>
+<style>
+  .outputdisplay{
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid grey;
+  }
+  .slidecontainer {
+  width: 60%;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 8px; /* Specified height */
+  background: rgb(105, 104, 104); /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
+  border-radius: 1000px;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 20px; /* Set a specific slider handle width */
+  height: 20px; /* Slider handle height */
+  background: #14acce; /* Blue background */
+  border-radius: 50%;
+  cursor: pointer; /* Cursor on hover */
+}
+.slider::-moz-range-thumb {
+  width: 20px; /* Set a specific slider handle width */
+  height: 20px; /* Slider handle height */
+  background: #14acce; /* Green background */
+  border-radius: 50%;
+  cursor: pointer; /* Cursor on hover */
+}
+</style>
