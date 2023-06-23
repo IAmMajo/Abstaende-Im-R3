@@ -6,6 +6,8 @@
 
 body {
   --sketch-background: var(--md-sys-color-surface);
+  --sketch-first-color: var(--md-sys-color-primary);
+  --sketch-second-color: var(--md-sys-color-tertiary);
 }
 
 h2,
@@ -35,10 +37,7 @@ md-icon {
   grid-template-columns: repeat(auto-fit, minmax(176px, auto));
   gap: var(--margin);
 }
-md-slider{
-  width: 50%;
-  margin: auto;
-}
+
 md-filled-button {
   margin: auto;
 }
@@ -61,6 +60,11 @@ md-menu-item md-icon {
   align-items: center;
   overflow: hidden;
   justify-content: center;
+}
+
+md-slider{
+  width: 50%;
+  margin: auto;
 }
 
 .invisible {

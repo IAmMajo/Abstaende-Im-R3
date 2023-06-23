@@ -6,6 +6,8 @@ import Line from "../classes/Line";
 import type Plane from "../classes/Plane";
 import Vector from "../classes/Vector";
 
+const COLORS = ['--sketch-first-color', '--sketch-second-color'];
+
 const main = document.querySelector("main")!;
 const bodyStyle = getComputedStyle(document.body);
 let p5Class: typeof p5 | null = null;
@@ -42,14 +44,13 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
       p5.background(bodyStyle.getPropertyValue("--sketch-background"));
       p5.angleMode("degrees");
       p5.rotateY(slider.value);
-      p5.directionalLight(0, 0, 250, 125, 200, 0.25);
-      p5.ambientMaterial(255);
-      geometrics.forEach((geometric) => {
+
+      geometrics.forEach((geometric, index) => {
         if (geometric instanceof Vector) {
           p5.push();
           p5.translate(geometric.x, -geometric.z, -geometric.y);
           p5.noStroke();
-          p5.fill(0, 0, 255);
+          p5.fill(bodyStyle.getPropertyValue(COLORS[index]));
           p5.sphere(10);
           p5.pop();
           return;
@@ -72,7 +73,7 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
 
           p5.push();
           p5.noFill();
-          p5.stroke(255, 0, 0);
+          p5.stroke(bodyStyle.getPropertyValue(COLORS[index]));
           p5.strokeWeight(10);
 
           /*
@@ -114,7 +115,7 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
         p5.push();
         p5.translate(p5Base.x, p5Base.y, p5Base.z);
         p5.noStroke();
-        p5.fill(0, 255, 0, 80);
+        p5.fill(bodyStyle.getPropertyValue(COLORS[index]));
         p5.plane(2400, 2400);
         p5.pop();
 
