@@ -17,6 +17,9 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
   sketchElement.id = "sketch";
   const slider = document.createElement("md-slider");
   slider.labeled = true;
+  slider.value = 180;
+  slider.min = 0;
+  slider.max = 360;
   main.append(sketchElement, slider);
   if (p5Class && P5VectorClass) {
     sketch?.remove();
@@ -37,7 +40,8 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
     };
     p5.draw = () => {
       p5.background(bodyStyle.getPropertyValue("--sketch-background"));
-      p5.rotateY(p5.millis() / 1000);
+      p5.angleMode("degrees");
+      p5.rotateY(slider.value);
       p5.directionalLight(0, 0, 250, 125, 200, 0.25);
       p5.ambientMaterial(255);
       geometrics.forEach((geometric) => {
