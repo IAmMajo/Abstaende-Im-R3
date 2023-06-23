@@ -17,7 +17,7 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
   sketchElement.id = "sketch";
   const slider = document.createElement("md-slider");
   slider.labeled = true;
-  slider.value = 180;
+  slider.value = 0;
   slider.min = 0;
   slider.max = 360;
   main.append(sketchElement, slider);
