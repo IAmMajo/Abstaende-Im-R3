@@ -6,7 +6,7 @@ import Line from "../classes/Line";
 import type Plane from "../classes/Plane";
 import Vector from "../classes/Vector";
 
-const COLORS = ['--sketch-first-color', '--sketch-second-color'];
+const COLORS = ["--sketch-first-color", "--sketch-second-color"];
 
 const main = document.querySelector("main")!;
 const bodyStyle = getComputedStyle(document.body);
