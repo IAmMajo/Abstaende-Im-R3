@@ -35,7 +35,7 @@ md-icon {
   grid-template-columns: repeat(auto-fit, minmax(176px, auto));
   gap: var(--margin);
 }
-md-slider{
+md-slider {
   width: 50%;
   margin: auto;
 }
