@@ -18,9 +18,8 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
   const sketchElement = document.createElement("div");
   sketchElement.id = "sketch";
   const slider = document.createElement("md-slider");
-  slider.labeled = true;
   slider.value = 0;
-  slider.min = 0;
+  slider.labeled = true;
   slider.max = 360;
   main.append(sketchElement, slider);
   if (p5Class && P5VectorClass) {
@@ -29,97 +28,78 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
     const progress = document.createElement("md-circular-progress");
     progress.indeterminate = true;
     sketchElement.appendChild(progress);
+    slider.disabled = true;
     p5Class = (await import("p5")).default;
     P5VectorClass = p5Class.Vector;
-    if (!sketchElement.parentElement) {
+    if (!sketchElement.parentElement && !slider.parentElement) {
       return;
     }
     progress.remove();
+    slider.disabled = false;
   }
   sketch = new p5Class((p5: p5) => {
     p5.setup = () => {
       p5.createCanvas(1200, 1200, p5.WEBGL);
     };
+    const zAxis = new P5VectorClass!(0, 0, 1);
+    const yAxis = new P5VectorClass!(0, 1, 0);
     p5.draw = () => {
       p5.background(bodyStyle.getPropertyValue("--sketch-background"));
-      p5.angleMode("degrees");
-      p5.rotateY(slider.value);
-
+      p5.rotateY(p5.radians(-slider.value));
       geometrics.forEach((geometric, index) => {
+        p5.push();
+        let base: Vector | null = null;
         if (geometric instanceof Vector) {
-          p5.push();
-          p5.translate(geometric.x, -geometric.z, -geometric.y);
-          p5.noStroke();
-          p5.fill(bodyStyle.getPropertyValue(COLORS[index]));
-          p5.sphere(10);
-          p5.pop();
-          return;
+          base = geometric;
+        } else {
+          base = geometric.base;
         }
-        if (geometric instanceof Line) {
-          const { base: geometricBase, direction: geometricDirection } =
-            geometric;
-          const p5Base = new P5VectorClass!(
-            geometricBase.x,
-            -geometricBase.z,
-            -geometricBase.y
-          );
+        p5.translate(base.x, -base.z, -base.y);
+        p5.noStroke();
+        p5.fill(bodyStyle.getPropertyValue(COLORS[index]));
+        if (geometric instanceof Vector) {
+          p5.sphere(10);
+        } else if (geometric instanceof Line) {
+          const geometricDirection = geometric.direction;
           const p5Direction = new P5VectorClass!(
             geometricDirection.x,
             -geometricDirection.z,
             -geometricDirection.y
-          ).normalize();
-          const start = p5Base.copy().sub(p5Direction.copy().mult(1200));
-          const end = p5Base.copy().add(p5Direction.copy().mult(1200));
-
-          p5.push();
-          p5.noFill();
-          p5.stroke(bodyStyle.getPropertyValue(COLORS[index]));
-          p5.strokeWeight(10);
-
-          /*
-           * This would be better but doesn't work because it is not possible to
-           * first do rotateX and then rotateY.
-           *
-           * p5.translate(p5Base.x, p5Base.y, p5Base.z);
-           * p5.rotateX(new P5VectorClass!(0, -1, 0).angleBetween(p5Direction));
-           * p5.rotateY(new P5VectorClass!(0, 0, 1).angleBetween(p5Direction));
-           * p5.cylinder(10, 2400);
-           */
-
-          p5.line(start.x, start.y, start.z, end.x, end.y, end.z);
-
-          p5.pop();
-          return;
+          );
+          const flatDirection = p5Direction.copy();
+          flatDirection.y = 0;
+          let angleY = zAxis.angleBetween(flatDirection);
+          if (angleY) {
+            if (
+              (flatDirection.x < 0 && flatDirection.z <= 0) ||
+              (flatDirection.z > 0 && flatDirection.x >= 0)
+            ) {
+              angleY = -angleY;
+            }
+          } else {
+            angleY = 0;
+          }
+          p5.rotateY(angleY);
+          p5.rotateX(Math.abs(yAxis.angleBetween(p5Direction)));
+          p5.cylinder(10, 2400);
+        } else {
+          const {
+            direction1: geometricDirection1,
+            direction2: geometricDirection2,
+          } = geometric;
+          const p5Direction1 = new P5VectorClass!(
+            geometricDirection1.x,
+            -geometricDirection1.z,
+            -geometricDirection1.y
+          );
+          const p5Direction2 = new P5VectorClass!(
+            geometricDirection2.x,
+            -geometricDirection2.z,
+            -geometricDirection2.y
+          );
+          p5.plane(2400, 2400);
         }
-        const {
-          base: geometricBase,
-          direction1: geometricDirection1,
-          direction2: geometricDirection2,
-        } = geometric;
-        const p5Base = new P5VectorClass!(
-          geometricBase.x,
-          -geometricBase.z,
-          -geometricBase.y
-        );
-        const p5Direction1 = new P5VectorClass!(
-          geometricDirection1.x,
-          -geometricDirection1.z,
-          -geometricDirection1.y
-        );
-        const p5Direction2 = new P5VectorClass!(
-          geometricDirection2.x,
-          -geometricDirection2.z,
-          -geometricDirection2.y
-        );
-
-        p5.push();
-        p5.translate(p5Base.x, p5Base.y, p5Base.z);
-        p5.noStroke();
-        p5.fill(bodyStyle.getPropertyValue(COLORS[index]));
-        p5.plane(2400, 2400);
         p5.pop();
-
-        return;
       });
     };
   }, sketchElement);
