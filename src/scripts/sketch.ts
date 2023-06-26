@@ -45,7 +45,8 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
     const yAxis = new P5VectorClass!(0, 1, 0);
     p5.draw = () => {
       p5.background(bodyStyle.getPropertyValue("--sketch-background"));
-      p5.pointLight(255, 255, 255, 100, -700, 300);
+      p5.pointLight(255, 255, 255, 500, -5000, 100);
+      p5.pointLight(128,128,128,100,500,100);
       p5.rotateY(p5.radians(-slider.value));
       geometrics.forEach((geometric, index) => {
         p5.push();
