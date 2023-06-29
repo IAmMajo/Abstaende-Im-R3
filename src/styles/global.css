@@ -9,6 +9,17 @@ body {
   --sketch-first-color: var(--md-sys-color-primary);
   --sketch-second-color: var(--md-sys-color-tertiary);
 }
+::-webkit-scrollbar {
+  width: 0.8em;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+  background-color: var(--md-sys-color-surface-variant);
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--md-sys-color-surface-container);
+}
 
 h2,
 h3,
