@@ -70,10 +70,7 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
           flatDirection.y = 0;
           let angleY = zAxis.angleBetween(flatDirection);
           if (angleY) {
-            if (
-              (flatDirection.x < 0 && flatDirection.z <= 0) ||
-              (flatDirection.z > 0 && flatDirection.x >= 0)
-            ) {
+            if (flatDirection.x < 0) {
               angleY = -angleY;
             }
           } else {
