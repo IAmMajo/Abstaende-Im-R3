@@ -9,7 +9,7 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
 ---
 
 <header class="surface">
-  <img class="icon" src="/R3Icon.png" />
+  <img id="img" class="icon" src="/R3Icon.png" />
   <h1 class="title-large">Abstände im R³</h1>
   {
     (
@@ -130,6 +130,7 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
   )!;
   addEventListener("close-menu", (event) => {
     bodyClasses.remove("light", "dark");
+    const image = document.getElementById("img");
     const target = event.target as MdMenuItem;
     const design = target.dataset.value;
     if (design) {
@@ -139,6 +140,12 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
     } else {
       colorScheme.content = "light dark";
       localStorage.removeItem("design");
+    }
+    if(document.body.classList.contains("light")){
+      image?.setAttribute("src","/R3Iconlightmode.png");
+    }
+    if(document.body.classList.contains("dark")){
+      image?.setAttribute("src","/R3Icon.png");
     }
     refreshSelectedDesign();
   });
