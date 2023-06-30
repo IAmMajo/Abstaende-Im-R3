@@ -141,11 +141,11 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
       colorScheme.content = "light dark";
       localStorage.removeItem("design");
     }
-    if(document.body.classList.contains("light")){
-      image?.setAttribute("src","/R3Iconlightmode.png");
+    if (document.body.classList.contains("light")) {
+      image?.setAttribute("src", "/R3Iconlightmode.png");
     }
-    if(document.body.classList.contains("dark")){
-      image?.setAttribute("src","/R3Icon.png");
+    if (document.body.classList.contains("dark")) {
+      image?.setAttribute("src", "/R3Icon.png");
     }
     refreshSelectedDesign();
   });
