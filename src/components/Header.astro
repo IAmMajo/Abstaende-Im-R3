@@ -32,7 +32,11 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
       {
         (
           // @ts-expect-error
-          <MdMenuItem headline="Systemeinstellung" id="system" client:only="lit">
+          <MdMenuItem
+            headline="Systemeinstellung"
+            id="system"
+            client:only="lit"
+          >
             {
               // @ts-expect-error
               <MdIcon
@@ -145,7 +149,7 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
 
     const target = event.target as MdMenuItem;
     const design = target.dataset.value;
-    if(target.id == "system"){
+    if (target.id == "system") {
       setSystemColor();
     }
     if (design) {
