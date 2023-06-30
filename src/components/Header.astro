@@ -32,7 +32,7 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
       {
         (
           // @ts-expect-error
-          <MdMenuItem headline="Systemeinstellung" client:only="lit">
+          <MdMenuItem headline="Systemeinstellung" id="system" client:only="lit">
             {
               // @ts-expect-error
               <MdIcon
@@ -123,16 +123,31 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
     menu.anchor = designButton;
     menu.show();
   });
-
+  const image = document.getElementById("img");
   const bodyClasses = document.body.classList;
   const colorScheme = document.querySelector<HTMLMetaElement>(
     '[name="color-scheme"]'
   )!;
+  function setSystemColor() {
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      image?.setAttribute("src", "/R3Icon.png");
+    } else {
+      image?.setAttribute("src", "/R3Iconlightmode.png");
+    }
+  }
+  setSystemColor();
+
   addEventListener("close-menu", (event) => {
     bodyClasses.remove("light", "dark");
-    const image = document.getElementById("img");
+
     const target = event.target as MdMenuItem;
     const design = target.dataset.value;
+    if(target.id == "system"){
+      setSystemColor();
+    }
     if (design) {
       bodyClasses.add(design);
       colorScheme.content = design;
