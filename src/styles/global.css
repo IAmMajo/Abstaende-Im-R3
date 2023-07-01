@@ -9,9 +9,11 @@ body {
   --sketch-first-color: var(--md-sys-color-primary);
   --sketch-second-color: var(--md-sys-color-tertiary);
 }
+
 ::-webkit-scrollbar {
   width: 0.8em;
 }
+
 ::-webkit-scrollbar-thumb {
   border-radius: 12px;
   background-color: var(--md-sys-color-surface-variant);
@@ -48,11 +50,13 @@ md-icon {
   grid-template-columns: repeat(auto-fit, minmax(176px, auto));
   gap: var(--margin);
 }
-md-slider {
-  width: 50%;
+
+md-filled-button {
   margin: auto;
 }
-md-filled-button {
+
+md-slider {
+  width: 50%;
   margin: auto;
 }
 
@@ -81,8 +85,29 @@ md-slider {
   margin: auto;
 }
 
+.dark-visible,
+.dark .light-visible {
+  display: none;
+}
+
+.dark .dark-visible {
+  display: unset;
+}
+
 .invisible {
   visibility: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  .light-visible,
+  .light .dark-visible {
+    display: none;
+  }
+
+  .dark-visible,
+  .light .light-visible {
+    display: unset;
+  }
 }
 
 @media (min-width: 600px) {

@@ -3,6 +3,8 @@ import "@fontsource/roboto/latin-400.css";
 import "@fontsource/roboto/latin-500.css";
 import Header from "../components/Header.astro";
 import Navigation from "../components/Navigation.astro";
+import logoDark from "../images/logo-dark.png";
+import logoLight from "../images/logo-light.png";
 import "../styles/global.css";
 import "../styles/theme/theme.css";
 
@@ -21,7 +23,8 @@ const props = Astro.props;
     <meta name="description" content={props.description} />
     <meta name="viewport" content="width=device-width" />
     <meta name="color-scheme" content="light dark" />
-    <link rel="icon" href="/R3Icon.png" />
+    <link media="(prefers-color-scheme: light)" rel="icon" href={logoLight} />
+    <link media="(prefers-color-scheme: dark)" rel="icon" href={logoDark} />
     <meta name="generator" content={Astro.generator} />
     <title>{props.title} | Abstände im R³</title>
   </head>

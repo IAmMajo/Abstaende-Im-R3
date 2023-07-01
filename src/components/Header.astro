@@ -6,10 +6,13 @@ import { MdIcon } from "@material/web/icon/icon";
 import { MdStandardIconButton } from "@material/web/iconbutton/standard-icon-button";
 import { MdMenu } from "@material/web/menu/menu";
 import { MdMenuItem } from "@material/web/menu/menu-item";
+import logoDark from "../images/logo-dark.png";
+import logoLight from "../images/logo-light.png";
 ---
 
 <header class="surface">
-  <img id="img" class="icon" src="/R3Icon.png" />
+  <img class="dark-visible" width="40" height="40" src={logoDark} />
+  <img class="light-visible" width="40" height="40" src={logoLight} />
   <h1 class="title-large">Abstände im R³</h1>
   {
     (
@@ -32,11 +35,7 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
       {
         (
           // @ts-expect-error
-          <MdMenuItem
-            headline="Systemeinstellung"
-            id="system"
-            client:only="lit"
-          >
+          <MdMenuItem headline="Systemeinstellung" client:only="lit">
             {
               // @ts-expect-error
               <MdIcon
@@ -85,10 +84,6 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
   </div>
 </header>
 <style>
-  .icon {
-    width: 40px;
-    height: 40px;
-  }
   header {
     height: 64px;
     display: flex;
@@ -127,31 +122,15 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
     menu.anchor = designButton;
     menu.show();
   });
-  const image = document.getElementById("img");
+
   const bodyClasses = document.body.classList;
   const colorScheme = document.querySelector<HTMLMetaElement>(
     '[name="color-scheme"]'
   )!;
-  function setSystemColor() {
-    if (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      image?.setAttribute("src", "/R3Icon.png");
-    } else {
-      image?.setAttribute("src", "/R3Iconlightmode.png");
-    }
-  }
-  setSystemColor();
-
   addEventListener("close-menu", (event) => {
     bodyClasses.remove("light", "dark");
-
     const target = event.target as MdMenuItem;
     const design = target.dataset.value;
-    if (target.id == "system") {
-      setSystemColor();
-    }
     if (design) {
       bodyClasses.add(design);
       colorScheme.content = design;
@@ -159,12 +138,6 @@ import { MdMenuItem } from "@material/web/menu/menu-item";
     } else {
       colorScheme.content = "light dark";
       localStorage.removeItem("design");
-    }
-    if (document.body.classList.contains("light")) {
-      image?.setAttribute("src", "/R3Iconlightmode.png");
-    }
-    if (document.body.classList.contains("dark")) {
-      image?.setAttribute("src", "/R3Icon.png");
     }
     refreshSelectedDesign();
   });
