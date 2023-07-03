@@ -43,6 +43,7 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
     };
     const zAxis = new P5VectorClass!(0, 0, 1);
     const yAxis = new P5VectorClass!(0, 1, 0);
+    // const xAxis = new P5VectorClass!(1, 0, 0);
     p5.draw = () => {
       p5.background(bodyStyle.getPropertyValue("--sketch-background"));
       p5.pointLight(255, 255, 255, 500, -5000, 100);
@@ -61,43 +62,59 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
         p5.fill(bodyStyle.getPropertyValue(COLORS[index]));
         if (geometric instanceof Vector) {
           p5.sphere(10);
-        } else if (geometric instanceof Line) {
-          const geometricDirection = geometric.direction;
-          const p5Direction = new P5VectorClass!(
-            geometricDirection.x,
-            -geometricDirection.z,
-            -geometricDirection.y
-          );
-          const flatDirection = p5Direction.copy();
-          flatDirection.y = 0;
-          let angleY = zAxis.angleBetween(flatDirection);
-          if (angleY) {
-            if (flatDirection.x < 0) {
-              angleY = -angleY;
-            }
-          } else {
-            angleY = 0;
-          }
-          p5.rotateY(angleY);
-          p5.rotateX(Math.abs(yAxis.angleBetween(p5Direction)));
-          p5.cylinder(10, 2400);
-        } else {
-          const {
-            direction1: geometricDirection1,
-            direction2: geometricDirection2,
-          } = geometric;
-          const p5Direction1 = new P5VectorClass!(
-            geometricDirection1.x,
-            -geometricDirection1.z,
-            -geometricDirection1.y
-          );
-          const p5Direction2 = new P5VectorClass!(
-            geometricDirection2.x,
-            -geometricDirection2.z,
-            -geometricDirection2.y
-          );
-          p5.plane(2400, 2400);
+          p5.pop();
+          return;
         }
+        let geometricDirection1: Vector | null = null;
+        if (geometric instanceof Line) {
+          geometricDirection1 = geometric.direction;
+        } else {
+          geometricDirection1 = geometric.direction1;
+        }
+        const p5Direction1 = new P5VectorClass!(
+          geometricDirection1.x,
+          -geometricDirection1.z,
+          -geometricDirection1.y
+        );
+        const flatDirection = p5Direction1.copy();
+        flatDirection.y = 0;
+        let angleY = zAxis.angleBetween(flatDirection);
+        if (angleY) {
+          if (flatDirection.x < 0) {
+            angleY = -angleY;
+          }
+        } else {
+          angleY = 0;
+        }
+        p5.rotateY(angleY);
+        const angleX = Math.abs(yAxis.angleBetween(p5Direction1));
+        p5.rotateX(angleX);
+        if (geometric instanceof Line) {
+          p5.cylinder(5, 2400);
+          p5.pop();
+          return;
+        }
+
+        /*
+         * Second direction vector needs to be taken into account too, but I am
+         * too stupid.
+         *
+         * const geometricDirection2 = geometric.direction2;
+         * const p5Direction2 = new P5VectorClass!(
+         *   geometricDirection2.x,
+         *   -geometricDirection2.z,
+         *   -geometricDirection2.y
+         * );
+         * let percentageY = angleX / p5.HALF_PI;
+         * if (angleX > p5.HALF_PI) {
+         *   percentageY = (p5.PI - angleX) / p5.HALF_PI;
+         * }
+         * p5Direction2.y *= percentageY;
+         * p5Direction2.z *= 1 - percentageY;
+         * p5.rotateY(-xAxis.angleBetween(p5Direction2));
+         */
+
+        p5.box(2400, 2400, 5);
         p5.pop();
       });
     };
