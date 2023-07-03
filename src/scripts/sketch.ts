@@ -6,7 +6,7 @@ import Line from "../classes/Line";
 import type Plane from "../classes/Plane";
 import Vector from "../classes/Vector";
 
-const COLORS = ["--sketch-first-color", "--sketch-second-color"];
+const COLORS = ["--md-sys-color-primary-dark", "--md-sys-color-tertiary-dark"];
 
 const main = document.querySelector("main")!;
 const bodyStyle = getComputedStyle(document.body);
@@ -45,7 +45,7 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
     const yAxis = new P5VectorClass!(0, 1, 0);
     // const xAxis = new P5VectorClass!(1, 0, 0);
     p5.draw = () => {
-      p5.background(bodyStyle.getPropertyValue("--sketch-background"));
+      p5.background(bodyStyle.getPropertyValue("--md-sys-color-surface"));
       p5.pointLight(255, 255, 255, 0, -150, 600);
       p5.rotateY(p5.radians(-slider.value));
       geometrics.forEach((geometric, index) => {

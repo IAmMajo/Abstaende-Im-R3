@@ -4,19 +4,13 @@
   user-select: none;
 }
 
-body {
-  --sketch-background: var(--md-sys-color-surface);
-  --sketch-first-color: var(--md-sys-color-primary);
-  --sketch-second-color: var(--md-sys-color-tertiary);
-}
-
 ::-webkit-scrollbar {
   width: 0.8em;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 12px;
-  background-color: var(--md-sys-color-surface-variant);
+  background-color: var(--md-sys-color-outline);
 }
 
 ::-webkit-scrollbar-track {
@@ -69,7 +63,7 @@ md-menu-item md-icon {
   margin: auto;
   padding: 10px 20px;
   text-align: center;
-  border-bottom: 1px solid rgb(148, 148, 148);
+  border-bottom: 1px solid var(--md-sys-color-outline);
 }
 
 #sketch {
