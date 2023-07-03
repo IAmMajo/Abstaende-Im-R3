@@ -41,6 +41,22 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
     p5.setup = () => {
       p5.createCanvas(1200, 1200, p5.WEBGL);
     };
+    const baseScale =
+      300 /
+      geometrics.reduce((max, geometric) => {
+        let base: Vector | null = null;
+        if (geometric instanceof Vector) {
+          base = geometric;
+        } else {
+          base = geometric.base;
+        }
+        return Math.max(
+          max,
+          Math.abs(base.x),
+          Math.abs(base.y),
+          Math.abs(base.z)
+        );
+      }, 0);
     const zAxis = new P5VectorClass!(0, 0, 1);
     const yAxis = new P5VectorClass!(0, 1, 0);
     // const xAxis = new P5VectorClass!(1, 0, 0);
@@ -48,6 +64,7 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
       p5.background(bodyStyle.getPropertyValue("--md-sys-color-surface"));
       p5.pointLight(255, 255, 255, 0, -150, 600);
       p5.rotateY(p5.radians(-slider.value));
+      const scale = baseScale * (sketchElement.clientWidth / 1200);
       geometrics.forEach((geometric, index) => {
         p5.push();
         let base: Vector | null = null;
@@ -56,7 +73,7 @@ export default async (...geometrics: (Vector | Line | Plane)[]) => {
         } else {
           base = geometric.base;
         }
-        p5.translate(base.x, -base.z, -base.y);
+        p5.translate(scale * base.x, scale * -base.z, scale * -base.y);
         p5.noStroke();
         p5.fill(bodyStyle.getPropertyValue(COLORS[index]));
         if (geometric instanceof Vector) {
